@@ -1,0 +1,169 @@
+*,
+:after,
+:before {
+	box-sizing: border-box;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+	padding: 0;
+    margin: 0;
+	overflow-x: hidden;
+	overflow-y: scroll;
+	font: 10px/1.5 "Montserrat", sans-serif;
+}
+
+.hideMe {
+    opacity: 1;
+    position: relative;
+    height: 100%;
+}
+
+.viewport {
+	position: fixed;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	background: #1976d2;
+}
+
+.scroll-container {
+	position: absolute;
+	overflow: hidden;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+.step {
+	position: relative;
+	height: 100vh;
+	color: #fff;
+	opacity: 1;
+}
+.step h1 {
+	top: 30px;
+	right: 30px;
+	font-size: 40vh;
+	width: 100%;
+	text-align: right;
+	position: absolute;
+	color: rgb(226, 92, 92);
+	line-height: 1;
+	letter-spacing: -0.03em;
+	margin: 0 0 20px;
+}
+
+.content {
+	position: absolute;
+	bottom: 0;
+	padding: 15px 15px 0 315px;
+	color: #fff;
+	font-size: 40px;
+}
+.content .text {
+	margin-bottom: 10px;
+	text-shadow: 0px 0px 1px rgba(0, 0, 0, 0.7);
+	-webkit-transition: color 0.1s;
+	transition: color 0.1s;
+}
+.content .text:hover {
+ 	 color: yellowgreen;
+}
+.content .img {
+	margin-left: 30px;
+	vertical-align: bottom;
+	-webkit-filter: drop-shadow(0px 0px 4px rgba(220, 220, 220, 0.5));
+	filter: drop-shadow(0px 0px 4px rgba(220, 220, 220, 0.5));
+	max-width: 80vh;
+}
+
+.info {
+	position: fixed;
+	pointer-events: none;
+	padding: 30px;
+	top: 0;
+	left: 0;
+	width: 300px;
+	height: 100%;
+	background: rgba(255, 255, 255, 0.1);
+}
+.info p {
+	font-size: 1.2em;
+	color: #fff;
+}
+.info p.field {
+	line-height: 20px;
+	clear: right;
+}
+.info p.field span {
+	display: inline-block;
+	margin-right: 10px;
+}
+.info p.field .label {
+	opacity: 1;
+}
+.info p.field .value {
+	font-weight: bold;
+	font-size: 18px;
+	float: right;
+}
+.info hr {
+	border: none;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+	margin: 30px 0;
+}
+/* 
+#step1 {
+	background: #7b1fa2;
+}
+
+#step2 {
+	background: #1976d2;
+}
+
+#step3 {
+	background: #00796b;
+}
+
+#step4 {
+	background: #388e3c;
+}
+
+#step5 {
+	background: #f57c00;
+} */
+
+#bgVideoFwd,
+#bgVideoBwd {
+	background-color: #000;
+	position: fixed;
+	height: 100%;
+	max-width: 100%;
+	min-width: 1500px;
+	top: 50%;
+	left: 50%;
+	-webkit-transform: translate(-50%, -50%) scale(0.8);
+	-moz-transform: translate(-50%, -50%) scale(0.8);
+	-ms-transform: translate(-50%, -50%) scale(0.8);
+	-o-transform: translate(-50%, -50%) scale(0.8);
+	transform: translate(-50%, -50%) scale(0.8);
+}
+
+#bgVideoFwd {
+	opacity: 1;
+	visibility: visible;
+}
+
+#bgVideoBwd {
+	opacity: 0;
+	visibility: visible;
+}

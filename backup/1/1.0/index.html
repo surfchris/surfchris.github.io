@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Cache-Control" content="public, max-age=2592000" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>1,2,3</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <!-- <link rel="preload" href="main.mp4" as="video" type="video/mp4"> -->
+</head>
+
+<body>
+    <div class="hideMe">
+        <div id="viewport" class="viewport">
+            <video id="bgVideoFwd" preload="auto" muted="" plays-inline="">
+                <source src="big_buck_bunny.mp4" type="video/mp4" />
+            </video>
+            <video id="bgVideoBwd" preload="auto" muted="" plays-inline="">
+                <source src="big_buck_bunny-reverse.mp4" type="video/mp4" />
+            </video>
+            <div id="scroll-container" class="scroll-container">
+                <div id="step1" class="step">
+                    <h1>1</h1>
+                    <div class="content">
+                        <div class="text">Turns green when hovered</div>
+                        <img class="img" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/106114/kermit2.png?v=1" />
+                    </div>
+                </div>
+
+                <div id="step2" class="step">
+                    <h1>2</h1>
+                </div>
+
+                <div id="step3" class="step">
+                    <h1>3</h1>
+                </div>
+
+                <div id="step4" class="step">
+                    <h1>4</h1>
+                </div>
+
+                <div id="step5" class="step">
+                    <h1>5</h1>
+                </div>
+            </div>
+        </div>
+
+        <div id="info" class="info">
+            <p class="field">
+                <span class="label">Current step</span>
+                <span class="value" id="currStep"></span>
+            </p>
+            <p class="field">
+                <span class="label">Current position</span>
+                <span class="value" id="currPos"></span>
+            </p>
+            <p class="field">
+                <span class="label">Current velocity</span>
+                <span class="value" id="currVel"></span>
+            </p>
+            <p class="field">
+                <span class="label">Current FPS</span>
+                <span class="value" id="currFPS"></span>
+            </p>
+            <p class="field">
+                <span class="label">Current step progress</span>
+                <span class="value" id="currStepProgress"></span>
+            </p>
+            <p class="field">
+                <span class="label">Total progress</span>
+                <span class="value" id="totalProgress"></span>
+            </p>
+
+            <hr />
+            <p class="field">
+                <span class="label">Steps</span>
+                <span class="value" id="numSteps"></span>
+            </p>
+            <p class="field">
+                <span class="label">Step Height</span>
+                <span class="value" id="stepHeight"></span>
+            </p>
+            <p class="field">
+                <span class="label">Padding</span>
+                <span class="value" id="padding"></span>
+            </p>
+            <p class="field">
+                <span class="label">Scroll height</span>
+                <span class="value" id="scrollHeight"></span>
+            </p>
+            <!--   <p class="field"><span class="label">Viewport height</span><span class="value" id="viewportHeight"></span></p> -->
+            <!--   <p class="field"><span class="label">Total height</span><span class="value" id="totalHeight"></span></p> -->
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.3/TweenMax.min.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+</body>
+
+</html>
