@@ -34,14 +34,17 @@ var headerNavDropdownBottomPaddingMobile = 60;
 var headerNavDropdownMenuHeight = 440;
 
 var styleSheet = document.styleSheets[0].cssRules;
-var ccsDropDownHeightRuleIndex;
+var ccsDropDownHeightRuleIndex = [];
+var counter = 0;
 for (var i = 0; i < styleSheet.length; i++) {
     if (styleSheet[i].selectorText == ".header__navigation > .wrapper.dropDownOpen") {
-    	ccsDropDownHeightRule0Index = i;
+		ccsDropDownHeightRuleIndex[counter] = i;
+		counter++;
     	// break;
 	}   
 	if (styleSheet[i].selectorText == ".header__navigation > .wrapper > .list") {
-    	ccsDropDownHeightRule1Index = i;
+		ccsDropDownHeightRuleIndex[counter] = i;
+		counter++;
     	// break;
     }
 }
@@ -78,7 +81,7 @@ for (var i = 0; i < sections.length; i++) {
     	contentStart = 0;
     }
 
-	tl.fromTo(content, {y: -contentStart*100 + "vh"}, { duration: segmentLength, y: -contentEnd*100 + "vh", ease: "none" }, contentDurationStart);
+	tl.fromTo(content, {force3D: true, y: -contentStart*100 + "vh"}, { force3D: true, duration: segmentLength, y: -contentEnd*100 + "vh", rotation: 0.01, ease: "none" }, contentDurationStart);
 // 	tl.to(content, { duration: segmentLength + pinning, onUpdate: setActiveStep, onUpdateParams: [i] }, contentDurationStart);
 	
 
@@ -102,22 +105,22 @@ for (var i = 0; i < sections.length; i++) {
 	headerListItems[i].addEventListener("click", clickScroll);
 
     if (i > 0) {
-         tl.fromTo(newDot, {scale: 1.25, opacity: 0.25}, { duration: dotEase, scale: 2.1, opacity: 1, ease: "none", onUpdate: setActive}, contentDurationStart + 0.75);
+         tl.fromTo(newDot, {scale: 1.25, opacity: 0.25}, { duration: dotEase, scale: 2.1, rotation: 0.01, opacity: 1, ease: "none", onUpdate: setActive}, contentDurationStart + 0.75);
     }
     
 
     contentDurationStart += segmentLength + pinning;
 
 	if (i < (sections.length-1)) {
-        tl.fromTo(newDot, {scale: 2.1, opacity: 1}, { duration: dotEase, scale: 1.25, opacity: 0.25, ease: "none", onUpdate: setActive}, contentDurationStart + 0.50);
+        tl.fromTo(newDot, {scale: 2.1, opacity: 1}, { duration: dotEase, scale: 1.25, rotation: 0.01, opacity: 0.25, ease: "none", onUpdate: setActive}, contentDurationStart + 0.50);
     }
     
     splitInnerText(toolTips[i]);
-    dotHoverToolTip.fromTo(toolTips[i].children, { x: 10, opacity: 0 }, { duration: 0.5, opacity: 1, x: 0, ease: Power3.easeOut, stagger: 0.02 }, "+=0");
+    dotHoverToolTip.fromTo(toolTips[i].children, { x: 10, opacity: 0 }, { duration: 0.5, opacity: 1, rotation: 0.01, x: 0, ease: Power3.easeOut, stagger: 0.02 }, "+=0");
     toolTipAnims.push(dotHoverToolTip);
 
 
-    dotHoverBullet.fromTo(newDot, { scale: 1.25, opacity: 0.25 }, { duration: 0.25, scale: 1.5, opacity:0.75, ease: Linear.easeNone }, 0);
+    dotHoverBullet.fromTo(newDot, { scale: 1.25, opacity: 0.25 }, { duration: 0.25, scale: 1.5, rotation: 0.01, opacity:0.75, ease: Linear.easeNone }, 0);
     dotAnims.push(dotHoverBullet);
     
     scrollToLabels[i].style.top = contentDurationStart * 100 + "vh";
@@ -131,7 +134,7 @@ gsap.set(".navigation__container__toolTips", {opacity: 1});
 var contentDurationEnd = contentDurationStart;
 document.body.style.height = (contentDurationEnd+1)*100 + "vh";
 
-tl.to(bgVideo, { duration: contentDurationEnd, currentTime: 20, ease: "none" }, 0);
+tl.to(bgVideo, { duration: contentDurationEnd, currentTime: 20, rotation: 0.01, ease: "none" }, 0);
 
 ScrollTrigger.create({
     animation: tl,
@@ -149,29 +152,30 @@ function viewHeight() {
 }
 
 function onResize(evnt) {
-	
-	var height = Math.max(viewport.clientHeight, viewport.offsetHeight ),
-		width = Math.max(viewport.clientWidth, viewport.offsetWidth );
-	if (evnt != -1) {
-		document.body.classList.add("resize-animation-stopper");
-		clearTimeout(resizeTimer);
-		setTimeout(function(){ document.body.classList.remove("resize-animation-stopper"); }, 500);
-	}
-	if (height > width) {
-		if (height < (headerHeightMobile + headerNavDropdownBottomPaddingMobile + headerNavDropdownMenuHeight)) {
-			styleSheet[ccsDropDownHeightRule0Index].style.height = height - headerHeightMobile - headerNavDropdownBottomPaddingMobile + "px";
-			styleSheet[ccsDropDownHeightRule1Index].style.height = height - headerHeightMobile - headerNavDropdownBottomPaddingMobile + "px";
-		} else {
-			styleSheet[ccsDropDownHeightRule0Index].style.height = headerNavDropdownMenuHeight + "px"
-			styleSheet[ccsDropDownHeightRule1Index].style.height = headerNavDropdownMenuHeight + "px"
+	if (isMobile.any) {
+		var height = Math.max(viewport.clientHeight, viewport.offsetHeight ),
+			width = Math.max(viewport.clientWidth, viewport.offsetWidth );
+		if (evnt != -1) {
+			document.body.classList.add("resize-animation-stopper");
+			clearTimeout(resizeTimer);
+			resizeTimer = setTimeout(function(){ document.body.classList.remove("resize-animation-stopper"); }, 500);
 		}
-	} else {
-		if (height < (headerHeightMobile + headerNavDropdownMenuHeight)) {
-			styleSheet[ccsDropDownHeightRule0Index].style.height = height - headerHeightMobile + "px" ;
-			styleSheet[ccsDropDownHeightRule1Index].style.height = height - headerHeightMobile + "px" ;
+		if (height > width) {
+			if (height < (headerHeightMobile + headerNavDropdownBottomPaddingMobile + headerNavDropdownMenuHeight)) {
+				styleSheet[ccsDropDownHeightRuleIndex[0]].style.height = height - headerHeightMobile - headerNavDropdownBottomPaddingMobile + "px";
+				styleSheet[ccsDropDownHeightRuleIndex[1]].style.height = height - headerHeightMobile - headerNavDropdownBottomPaddingMobile + "px";
+			} else {
+				styleSheet[ccsDropDownHeightRuleIndex[0]].style.height = headerNavDropdownMenuHeight + "px"
+				styleSheet[ccsDropDownHeightRuleIndex[1]].style.height = headerNavDropdownMenuHeight + "px"
+			}
 		} else {
-			styleSheet[ccsDropDownHeightRule0Index].style.height = headerNavDropdownMenuHeight + "px"
-			styleSheet[ccsDropDownHeightRule1Index].style.height = headerNavDropdownMenuHeight + "px"
+			if (height < (headerHeightMobile + headerNavDropdownMenuHeight)) {
+				styleSheet[ccsDropDownHeightRuleIndex[0]].style.height = height - headerHeightMobile + "px" ;
+				styleSheet[ccsDropDownHeightRuleIndex[1]].style.height = height - headerHeightMobile + "px" ;
+			} else {
+				styleSheet[ccsDropDownHeightRuleIndex[0]].style.height = headerNavDropdownMenuHeight + "px"
+				styleSheet[ccsDropDownHeightRuleIndex[1]].style.height = headerNavDropdownMenuHeight + "px"
+			}
 		}
 	}
 }
