@@ -141,7 +141,7 @@ ScrollTrigger.create({
     trigger: document.body,
     start: "top top", 
     end: "bottom bottom",
-    scrub: 1,
+    scrub: false,
 });
 
 isLoading=false;
