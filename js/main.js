@@ -8,7 +8,7 @@ var intro = "Uncompromised Ultra Efficient Turbine Power, the small engine that 
 
 var dots = document.querySelector(".navigation__container__dots");
 var viewport = document.querySelector(".viewport");
-var headerDropDownSelect = document.querySelector(".header__navigation");
+var headerDropDownSelect = document.querySelector(".header__navigation__dropDownHeading");
 var headerList = document.querySelector(".header__navigation .list");
 var headerWrapper = document.querySelector(".header__navigation > .wrapper");
 var headerListItems = document.querySelectorAll(".header__navigation .list > .item");

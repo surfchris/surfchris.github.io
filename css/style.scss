@@ -195,16 +195,22 @@ body {
     width: 100%;
     height: $header-height-mobile;
     background: $header-color;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+
  
-    @media (min-width: 768px) {
-        // height: calc(3vw + 3vh);
-        height: 80px;
-        padding: 0.5% 4%;
-    }
+    // @media (min-width: 768px) {
+    //     // height: calc(3vw + 3vh);
+    //     height: 80px;
+    //     padding: 0.5% 4%;
+    // }
 
     a {
-        // font-family: $mukta;
-        font-family: Arial,sans-serif;
+        font-family: $mukta;
+        // font-family: Arial,sans-serif;
         font-weight: 500;
         font-size: 1em;
         line-height: 1;
@@ -217,11 +223,18 @@ body {
     }
 
     &__logo {
-        position: relative;
-        display: inline-block;
         height: 100%;
         width: $header-logo-width-mobile;
-        text-align: center;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        // text-align: center;
+        // position: relative;
+        // display: inline-block;
+
+
         // padding: 0px 0px;
         // top: 50%;
         // transform: translateY(-33.33%);
@@ -232,32 +245,43 @@ body {
         // }     
 
         &__svg {
+
             height: 66.7%;
-            transform: translateY(25%);
+            // transform: translateY(25%);
+
             cursor: pointer;
             opacity: 1;
             fill: $active-color;
         }
        
-        &::after {
-            display:inline-block;
-            position: absolute;
-            content: "";
-            width: 100%;
-            height: 50%;
-            left: 0;
-            top: 50%;
-            transform: translateY(-50%);
-            border-right: 1px solid $separator-color;
-        }
+        // &::after {
+        //     // display:inline-block;
+        //     // position: absolute;
+        //     content: "";
+        //     width: 1px;
+        //     height: 50%;
+        //     border-right: 1px solid $separator-color;
+        //     // left: 0;
+        //     // top: 50%;
+        //     // transform: translateY(-50%);
+        // }
     }
+
+
 
     &__navigation {
         height: 100%;
-        width: calc(100vw - #{$header-logo-width-mobile} - #{$header-burger-width-mobile});
-        display: inline-block;
-        position: absolute;
-        top: 0;
+        // width: calc(100vw - #{$header-logo-width-mobile} - #{$header-burger-width-mobile});
+        // display: inline-block;
+        // position: absolute;
+        // top: 0;
+
+        flex: 1 1;
+        // display: flex;
+        // flex-direction: row;
+        // flex-wrap: nowrap;
+        // align-items: center;
+        // justify-content: flex-start;
 
         > .wrapper {
             position: absolute;
@@ -333,8 +357,8 @@ body {
                         // position: relative;
                         // flex: 1 1;
                         color: $hover-color;
-                        font-family: $mukta;
-                        text-decoration: none;
+                        // font-family: $mukta;
+                        // text-decoration: none;
                         font-size: 22px;
                         // line-height: 2.5;
                         // height: 50px;
@@ -363,7 +387,7 @@ body {
             }
             &.dropDownOpen {
                 height: $header-nav-dropdown-menu-height;
-                background-color: green; // #000;
+                background-color: orange; // #000;
                 transition: height 0.3s ease-in, background 0.5s ease-in;
                 transition-delay: 0.25s;
 
@@ -391,50 +415,79 @@ body {
         
         // }
 
-        &__dropDownIcon {
- 
+        &__dropDownHeading {
+            height: 100%;
+            // top: 50%;
+            // transform: translateY(50%);
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            align-items: center;
+            justify-content: flex-start;
+
      
             > a {
-                padding-right: 5px;
-                font-weight: 700; 
+                flex: 1 1;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                padding-left: 10px;
+                font-size: 20px;
+                font-weight: 500; 
                 color: $active-color;
+
+                > i {
+                    color: $active-color;
+                    padding-left: 10px;
+                }
+    
             }
 
-            > i {
-                color: $active-color;
-            }
         }
     }
 
     &__burger {
-        position: absolute;
-        display: inline-block;
         height: 100%;
-        text-align: center;
-        right: 0;
         width: $header-burger-width-mobile;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+ 
+        // position: absolute;
+        // display: inline-block;
+        // text-align: center;
+        // right: 0;
+
         // padding: 15px 0px;
         // padding-top: 20px;
         // padding-bottom: 20px;
      
         &__svg {
             height: 33.3%;
-            transform: translateY(100%);
+            // transform: translateY(100%);
             > rect {
                 fill: $hover-color;
             }
         }
 
-        &::before {
-            position: absolute;
-            content: "";
-            width: 100%;
-            height: 50%;
-            left: 0;
-            top: 50%;
-            transform: translateY(-50%);
-            border-left: 1px solid $separator-color;      
-        }
+        // &::before {
+        //     position: absolute;
+        //     content: "";
+        //     width: 100%;
+        //     height: 50%;
+        //     left: 0;
+        //     top: 50%;
+        //     transform: translateY(-50%);
+        //     border-left: 1px solid $separator-color;      
+        // }
+
+    }
+
+    &__separator {
+        width: 1px;
+        height: 50%;
+        border-right: 1px solid $separator-color;
 
     }
  
