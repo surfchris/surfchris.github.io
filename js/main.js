@@ -8,7 +8,7 @@ var intro = "Uncompromised Ultra Efficient Turbine Power, the small engine that 
 
 var dots = document.querySelector(".navigation__container__dots");
 var viewport = document.querySelector(".viewport");
-var headerDropDownSelect = document.querySelector(".header__navigation__dropDownHeading");
+var headerDropDownSelect = document.querySelector(".header__navigation__dropdown-button");
 var headerList = document.querySelector(".header__navigation .list");
 var headerWrapper = document.querySelector(".header__navigation > .wrapper");
 var headerListItems = document.querySelectorAll(".header__navigation .list > .item");
@@ -211,10 +211,10 @@ function setActive() {
 		if (window.location.href.indexOf("#" + scrollToLabels[index].id) < 0) {
 			history.replaceState(null, null, "#" +  scrollToLabels[index].id);
 		}
-		var dropDownTitle = document.querySelector(".header__navigation__dropdown > a");
-		var activeItem = document.querySelector(".header__navigation__dropdown__list__item .active");
+		var dropDownTitle = document.querySelector(".header__navigation__dropdown-button > a");
+		var activeItem = document.querySelector(".header__navigation .list > .item > a.active");
 		if (activeItem && dropDownTitle) {
-    		dropDownTitle.innerText = activeItem.innerText;			
+    		dropDownTitle.innerHTML = scrollToLabels[index].id + "<i class=\"fas fa-chevron-down\"></i>";			
 		}
 
    	}

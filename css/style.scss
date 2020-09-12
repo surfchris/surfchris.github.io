@@ -415,19 +415,21 @@ body {
         
         // }
 
-        &__dropDownHeading {
+        &__dropdown-button {
             height: 100%;
+            width: 100%;
             // top: 50%;
             // transform: translateY(50%);
-            display: flex;
-            flex-direction: row;
-            flex-wrap: nowrap;
-            align-items: center;
-            justify-content: flex-start;
+            // display: flex;
+            // flex-direction: row;
+            // flex-wrap: nowrap;
+            // align-items: center;
+            // justify-content: flex-start;
 
      
             > a {
-                flex: 1 1;
+                // flex: 1 1;
+                width: 100%;
                 height: 100%;
                 display: flex;
                 align-items: center;
