@@ -30,7 +30,7 @@ window.addEventListener("resize", onResize);
 var resizeTimer;
 
 var headerHeightMobile = 60;
-var headerNavDropdownBottomPaddingMobile = 60;
+var headerNavDropdownBottomPaddingMobile = 75;
 var headerNavDropdownMenuHeight = 440;
 
 var styleSheet = document.styleSheets[0].cssRules;
@@ -214,7 +214,8 @@ function setActive() {
 		var dropDownTitle = document.querySelector(".header__navigation__dropdown-button > a");
 		var activeItem = document.querySelector(".header__navigation .list > .item > a.active");
 		if (activeItem && dropDownTitle) {
-    		dropDownTitle.innerHTML = scrollToLabels[index].id + "<i class=\"fas fa-chevron-down\"></i>";			
+    		// dropDownTitle.innerHTML = scrollToLabels[index].id + "<i class=\"fas fa-chevron-down\"></i>";			
+    		dropDownTitle.innerHTML = scrollToLabels[index].id; // + "<i class=\"arrow1\"></i><i class=\"arrow2\"></i>";			
 		}
 
    	}
