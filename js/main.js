@@ -8,9 +8,9 @@ var intro = "Uncompromised Ultra Efficient Turbine Power, the small engine that 
 
 var dots = document.querySelector(".navigation__container__dots");
 var viewport = document.querySelector(".viewport");
-var headerDropDownSelect = document.querySelector(".header__navigation__dropdown-button");
+var headerDropDownSelect = document.querySelector(".header__navigation .header-center");
 var headerList = document.querySelector(".header__navigation .list");
-var headerWrapper = document.querySelector(".header__navigation > .wrapper");
+var headerNavigation = document.querySelector(".header__navigation");
 var headerListItems = document.querySelectorAll(".header__navigation .list > .item");
 var headerListItemText = document.querySelectorAll(".header__navigation .list > .item > a");
 var scrollToLabels = document.querySelectorAll(".scrollTo_label");
@@ -37,12 +37,12 @@ var styleSheet = document.styleSheets[0].cssRules;
 var ccsDropDownHeightRuleIndex = [];
 var counter = 0;
 for (var i = 0; i < styleSheet.length; i++) {
-    if (styleSheet[i].selectorText == ".header__navigation > .wrapper.dropDownOpen") {
+    if (styleSheet[i].selectorText == ".header__navigation.dropDownOpen .items-wrapper") {
 		ccsDropDownHeightRuleIndex[counter] = i;
 		counter++;
     	// break;
 	}   
-	if (styleSheet[i].selectorText == ".header__navigation > .wrapper > .list") {
+	if (styleSheet[i].selectorText == ".header__navigation .items-wrapper > .list") {
 		ccsDropDownHeightRuleIndex[counter] = i;
 		counter++;
     	// break;
@@ -243,7 +243,7 @@ function splitInnerText(el) {
 
 function clickHeaderDropDown(evnt) {
     onResize(-1);
-	headerWrapper.classList.toggle('dropDownOpen');
+	headerNavigation.classList.toggle('dropDownOpen');
 }
 
 function dotHover(evnt) {
