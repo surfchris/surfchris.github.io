@@ -8,8 +8,9 @@ var intro = "Uncompromised Ultra Efficient Turbine Power, the small engine that 
 
 var dots = document.querySelector(".navigation__container__dots");
 var viewport = document.querySelector(".viewport");
-var headerDropDownSelect = document.querySelector(".header__navigation .header-center");
+var headerDropDownSelect = document.querySelector(".header__navigation .header-center .arrowbox");
 var headerList = document.querySelector(".header__navigation .list");
+var headerDropDownMenu = document.querySelector(".header__navigation .items-wrapper");
 var headerNavigation = document.querySelector(".header__navigation");
 var headerListItems = document.querySelectorAll(".header__navigation .list > .item");
 var headerListItemText = document.querySelectorAll(".header__navigation .list > .item > a");
@@ -26,6 +27,7 @@ var tl = new gsap.timeline({
 });
 
 headerDropDownSelect.addEventListener("click", clickHeaderDropDown);
+document.addEventListener("click", closeMenu);
 window.addEventListener("resize", onResize);
 var resizeTimer;
 
@@ -62,6 +64,8 @@ var isLoading = true;
 
 // sections.forEach((section,i) => {
 for (var i = 0; i < sections.length; i++) {
+
+	if (i == (sections.length-1)) {isLoading = false}
     
     var section = sections[i];
     var segmentLength = bgVideoSegments[i+1] - bgVideoSegments[i];
@@ -105,10 +109,9 @@ for (var i = 0; i < sections.length; i++) {
 	headerListItems[i].addEventListener("click", clickScroll);
 
     if (i > 0) {
-         tl.fromTo(newDot, {scale: 1.25, opacity: 0.25}, { duration: dotEase, scale: 2.1, rotation: 0.01, opacity: 1, ease: "none", onUpdate: setActive}, contentDurationStart + 0.75);
+        tl.fromTo(newDot, {scale: 1.25, opacity: 0.25}, { duration: dotEase, scale: 2.1, rotation: 0.01, opacity: 1, ease: "none", onUpdate: setActive}, contentDurationStart + 0.75);
     }
     
-
     contentDurationStart += segmentLength + pinning;
 
 	if (i < (sections.length-1)) {
@@ -124,6 +127,7 @@ for (var i = 0; i < sections.length; i++) {
     dotAnims.push(dotHoverBullet);
     
     scrollToLabels[i].style.top = contentDurationStart * 100 + "vh";
+
     
 //     console.log(contentDurationStart);
 
@@ -134,7 +138,7 @@ gsap.set(".navigation__container__toolTips", {opacity: 1});
 var contentDurationEnd = contentDurationStart;
 document.body.style.height = (contentDurationEnd+1)*100 + "vh";
 
-tl.to(bgVideo, { duration: contentDurationEnd, currentTime: 20, rotation: 0.01, ease: "none" }, 0);
+// tl.to(bgVideo, { duration: contentDurationEnd, currentTime: 20, rotation: 0.01, ease: "none" }, 0);
 
 ScrollTrigger.create({
     animation: tl,
@@ -145,11 +149,13 @@ ScrollTrigger.create({
 });
 
 isLoading=false;
+viewport.style.visibility = "visible";
 // setActive();
 
 function viewHeight() {
 	
 }
+
 
 function onResize(evnt) {
 	if (isMobile.any) {
@@ -182,9 +188,9 @@ function onResize(evnt) {
 
 
 function setActive() {
-    var dotsX = document.querySelectorAll('.navigation__container__dots__dot');
-   	var index = this._targets[0].index;
    	if (!isLoading) {
+	    var dotsX = document.querySelectorAll('.navigation__container__dots__dot');
+   	    var index = this._targets[0].index;
 // 		dotsX.forEach((dot,i) => {
 	    for (var i = 0; i < dotsX.length; i++) {
 			if (i != index) {
@@ -211,9 +217,9 @@ function setActive() {
 		if (window.location.href.indexOf("#" + scrollToLabels[index].id) < 0) {
 			history.replaceState(null, null, "#" +  scrollToLabels[index].id);
 		}
-		var dropDownTitle = document.querySelector(".header__navigation__dropdown-button > a");
-		var activeItem = document.querySelector(".header__navigation .list > .item > a.active");
-		if (activeItem && dropDownTitle) {
+		var dropDownTitle = document.querySelector(".header-center > a");
+		// var activeItem = document.querySelector(".header__navigation .list > .item > a.active");
+		if (dropDownTitle) {
     		// dropDownTitle.innerHTML = scrollToLabels[index].id + "<i class=\"fas fa-chevron-down\"></i>";			
     		dropDownTitle.innerHTML = scrollToLabels[index].id; // + "<i class=\"arrow1\"></i><i class=\"arrow2\"></i>";			
 		}
@@ -224,7 +230,7 @@ function setActive() {
 
 function splitInnerText(el) {
 
-	var toolTipsStr = el.innerText;
+	var toolTipsStr = el.textContent;
 	el.innerText = "";
 	for (var j = 0; j < toolTipsStr.length; j++) {
 		var divEl = document.createElement("div");
@@ -241,13 +247,18 @@ function splitInnerText(el) {
 	}
 }
 
+function closeMenu(evnt) {
+	if ((isMobile.any) && (((headerNavigation.classList.contains('dropDownOpen')) && !(evnt.target === headerDropDownSelect) && !(evnt.target === headerDropDownMenu)))) {
+		console.log("a");
+	}
+}
+
 function clickHeaderDropDown(evnt) {
     onResize(-1);
 	headerNavigation.classList.toggle('dropDownOpen');
 }
 
 function dotHover(evnt) {
-
     evnt.preventDefault();
 //     let dotsX = document.querySelectorAll('.dot');
     if (evnt.type == "mouseenter") {

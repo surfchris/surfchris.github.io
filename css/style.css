@@ -39,6 +39,7 @@ body::-webkit-scrollbar-thumb {
   overflow: hidden;
   position: fixed;
   height: 100vh !important;
+  visibility: hidden;
   width: 100%;
 }
 
@@ -309,6 +310,10 @@ body::-webkit-scrollbar-thumb {
 
 .header__navigation .header-center .arrowbox {
   width: 65px;
+  -webkit-transition: background 1s ease-out;
+  transition: background 1s ease-out;
+  -webkit-transition-delay: 0.3s;
+          transition-delay: 0.3s;
   height: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -324,45 +329,51 @@ body::-webkit-scrollbar-thumb {
 .header__navigation .header-center .arrowbox .arrow {
   width: 13px;
   height: 13px;
+  margin-left: 10px;
   position: relative;
-  bottom: -4px;
-  left: -6px;
   -webkit-transition: 0.4s ease;
   transition: 0.4s ease;
-  -webkit-transform: rotate(45deg);
-          transform: rotate(45deg);
+  -webkit-transform: rotate(0);
+          transform: rotate(0);
 }
 
 .header__navigation .header-center .arrowbox .arrow:before, .header__navigation .header-center .arrowbox .arrow:after {
+  -webkit-box-sizing: content-box;
+          box-sizing: content-box;
   position: absolute;
   content: '';
-  width: 11px;
-  height: 2px;
-  background-color: #fff;
+  width: 1.5px;
+  height: 11px;
+  border-bottom: 12px solid white;
+  -webkit-transform: rotate(0);
+          transform: rotate(0);
   -webkit-transition: 0.4s ease;
   transition: 0.4s ease;
 }
 
+.header__navigation .header-center .arrowbox .arrow:before {
+  -webkit-transform: rotate(-135deg);
+          transform: rotate(-135deg);
+}
+
 .header__navigation .header-center .arrowbox .arrow:after {
-  -webkit-transform: rotate(90deg);
-          transform: rotate(90deg);
-  top: -5px;
-  left: 5px;
+  -webkit-transform: rotate(135deg);
+          transform: rotate(135deg);
 }
 
 .header__navigation .items-wrapper {
   position: absolute;
-  background-color: blue;
+  background-color: #1a1a1a;
   overflow: hidden;
-  -webkit-transition: height 0.5s ease-out, background 1s ease-out;
-  transition: height 0.5s ease-out, background 1s ease-out;
+  -webkit-transition: width 0.6s ease-in-out,height 0.5s ease-out, background 1s ease-out;
+  transition: width 0.6s ease-in-out,height 0.5s ease-out, background 1s ease-out;
   -webkit-transition-delay: 0.2s;
           transition-delay: 0.2s;
   top: 100%;
+  right: 65px;
   height: 0px;
-  width: calc(100% - 65px - 75px);
+  width: 65px;
   max-width: 275px;
-  min-width: 220px;
 }
 
 .header__navigation .items-wrapper > .list {
@@ -471,11 +482,37 @@ body::-webkit-scrollbar-thumb {
           flex: 2 2;
 }
 
+.header__navigation.dropDownOpen .header-center .arrowbox {
+  background-color: #000;
+  -webkit-transition: background 0.5s ease-in;
+  transition: background 0.5s ease-in;
+  -webkit-transition-delay: 0.1s;
+          transition-delay: 0.1s;
+}
+
+.header__navigation.dropDownOpen .header-center .arrowbox .arrow {
+  -webkit-transform: rotate(0);
+          transform: rotate(0);
+  -webkit-transform: translate(0, -8px);
+          transform: translate(0, -8px);
+}
+
+.header__navigation.dropDownOpen .header-center .arrowbox .arrow:before {
+  -webkit-transform: rotate(-45deg);
+          transform: rotate(-45deg);
+}
+
+.header__navigation.dropDownOpen .header-center .arrowbox .arrow:after {
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+}
+
 .header__navigation.dropDownOpen .items-wrapper {
   height: 440px;
-  background-color: orange;
-  -webkit-transition: height 0.3s ease-in, background 0.5s ease-in;
-  transition: height 0.3s ease-in, background 0.5s ease-in;
+  width: calc(100% - 65px - 75px);
+  background-color: #000;
+  -webkit-transition: width 0.3s ease-in-out, height 0.3s ease-in, background 0.5s ease-in;
+  transition: width 0.3s ease-in-out, height 0.3s ease-in, background 0.5s ease-in;
   -webkit-transition-delay: 0.25s;
           transition-delay: 0.25s;
 }
