@@ -8,12 +8,6 @@ var intro = "Uncompromised Ultra Efficient Turbine Power, the small engine that 
 
 var dots = document.querySelector(".navigation__container__dots");
 var viewport = document.querySelector(".viewport");
-var headerDropDownSelect = document.querySelector(".header__navigation .header-center .arrowbox");
-var headerList = document.querySelector(".header__navigation .list");
-var headerDropDownMenu = document.querySelector(".header__navigation .items-wrapper");
-var headerNavigation = document.querySelector(".header__navigation");
-var headerListItems = document.querySelectorAll(".header__navigation .list > .item");
-var headerListItemText = document.querySelectorAll(".header__navigation .list > .item > a");
 var scrollToLabels = document.querySelectorAll(".scrollTo_label");
 var toolTips = document.querySelectorAll(".navigation__container__toolTips__toolTip");
 var sections = gsap.utils.toArray(".content__section");
@@ -21,30 +15,39 @@ var content = document.querySelector(".content");
 var toolTipAnims = [];
 var dotAnims = [];
 
+var headerLowerDropDownSelect = document.querySelector(".header__lower__navigation .header-center .arrowbox");
+var headerLowerLogo = document.querySelector(".header__lower__logo");
+var headerLower = document.querySelector(".header__lower");
+var headerLowerList = document.querySelector(".header__lower__navigation .list");
+var headerLowerDropDownMenu = document.querySelector(".header__lower__navigation .items-wrapper");
+var headerLowerNavigation = document.querySelector(".header__lower__navigation");
+var headerLowerListItems = document.querySelectorAll(".header__lower__navigation .list > .item");
+var headerLowerListItemText = document.querySelectorAll(".header__lower__navigation .list > .item > a");
 
 var tl = new gsap.timeline({
 	paused: true,
 });
 
-headerDropDownSelect.addEventListener("click", clickHeaderDropDown);
+headerLowerDropDownSelect.addEventListener("click", clickHeaderLowerDropDown);
+// headerLowerLogo.addEventListener("click", clickHeaderLowerLogo);
 document.addEventListener("click", closeMenu);
 window.addEventListener("resize", onResize);
 var resizeTimer;
 
-var headerHeightMobile = 60;
-var headerNavDropdownBottomPaddingMobile = 75;
-var headerNavDropdownMenuHeight = 440;
+var headerLowerHeightMobile = 60;
+var headerLowerNavDropdownBottomPaddingMobile = 75;
+var headerLowerNavDropdownMenuHeight = 440;
 
 var styleSheet = document.styleSheets[0].cssRules;
 var ccsDropDownHeightRuleIndex = [];
 var counter = 0;
 for (var i = 0; i < styleSheet.length; i++) {
-    if (styleSheet[i].selectorText == ".header__navigation.dropDownOpen .items-wrapper") {
+    if (styleSheet[i].selectorText == ".header__lower__navigation.dropDownOpen .items-wrapper") {
 		ccsDropDownHeightRuleIndex[counter] = i;
 		counter++;
     	// break;
 	}   
-	if (styleSheet[i].selectorText == ".header__navigation .items-wrapper > .list") {
+	if (styleSheet[i].selectorText == ".header__lower__navigation .items-wrapper > .list") {
 		ccsDropDownHeightRuleIndex[counter] = i;
 		counter++;
     	// break;
@@ -103,10 +106,10 @@ for (var i = 0; i < sections.length; i++) {
     newLink.appendChild(newDot);
 	dots.appendChild(newLink);
 	
-// 	headerListItemText[i].index = i;
-// 	headerListItemText[i].innerText = scrollToLabels[i]
-    headerListItems[i].index = i;
-	headerListItems[i].addEventListener("click", clickScroll);
+// 	headerLowerListItemText[i].index = i;
+// 	headerLowerListItemText[i].innerText = scrollToLabels[i]
+    headerLowerListItems[i].index = i;
+	headerLowerListItems[i].addEventListener("click", clickScroll);
 
     if (i > 0) {
         tl.fromTo(newDot, {scale: 1.25, opacity: 0.25}, { duration: dotEase, scale: 2.1, rotation: 0.01, opacity: 1, ease: "none", onUpdate: setActive}, contentDurationStart + 0.75);
@@ -167,20 +170,20 @@ function onResize(evnt) {
 			resizeTimer = setTimeout(function(){ document.body.classList.remove("resize-animation-stopper"); }, 500);
 		}
 		if (height > width) {
-			if (height < (headerHeightMobile + headerNavDropdownBottomPaddingMobile + headerNavDropdownMenuHeight)) {
-				styleSheet[ccsDropDownHeightRuleIndex[0]].style.height = height - headerHeightMobile - headerNavDropdownBottomPaddingMobile + "px";
-				styleSheet[ccsDropDownHeightRuleIndex[1]].style.height = height - headerHeightMobile - headerNavDropdownBottomPaddingMobile + "px";
+			if (height < (headerLowerHeightMobile + headerLowerNavDropdownBottomPaddingMobile + headerLowerNavDropdownMenuHeight)) {
+				styleSheet[ccsDropDownHeightRuleIndex[0]].style.height = height - headerLowerHeightMobile - headerLowerNavDropdownBottomPaddingMobile + "px";
+				styleSheet[ccsDropDownHeightRuleIndex[1]].style.height = height - headerLowerHeightMobile - headerLowerNavDropdownBottomPaddingMobile + "px";
 			} else {
-				styleSheet[ccsDropDownHeightRuleIndex[0]].style.height = headerNavDropdownMenuHeight + "px"
-				styleSheet[ccsDropDownHeightRuleIndex[1]].style.height = headerNavDropdownMenuHeight + "px"
+				styleSheet[ccsDropDownHeightRuleIndex[0]].style.height = headerLowerNavDropdownMenuHeight + "px"
+				styleSheet[ccsDropDownHeightRuleIndex[1]].style.height = headerLowerNavDropdownMenuHeight + "px"
 			}
 		} else {
-			if (height < (headerHeightMobile + headerNavDropdownMenuHeight)) {
-				styleSheet[ccsDropDownHeightRuleIndex[0]].style.height = height - headerHeightMobile + "px" ;
-				styleSheet[ccsDropDownHeightRuleIndex[1]].style.height = height - headerHeightMobile + "px" ;
+			if (height < (headerLowerHeightMobile + headerLowerNavDropdownMenuHeight)) {
+				styleSheet[ccsDropDownHeightRuleIndex[0]].style.height = height - headerLowerHeightMobile + "px" ;
+				styleSheet[ccsDropDownHeightRuleIndex[1]].style.height = height - headerLowerHeightMobile + "px" ;
 			} else {
-				styleSheet[ccsDropDownHeightRuleIndex[0]].style.height = headerNavDropdownMenuHeight + "px"
-				styleSheet[ccsDropDownHeightRuleIndex[1]].style.height = headerNavDropdownMenuHeight + "px"
+				styleSheet[ccsDropDownHeightRuleIndex[0]].style.height = headerLowerNavDropdownMenuHeight + "px"
+				styleSheet[ccsDropDownHeightRuleIndex[1]].style.height = headerLowerNavDropdownMenuHeight + "px"
 			}
 		}
 	}
@@ -200,8 +203,8 @@ function setActive() {
 				if (sections[i].classList.contains('active')) {
 					sections[i].classList.remove('active');
 				}
-				if (headerListItemText[i].classList.contains('active')) {
-					headerListItemText[i].classList.remove('active');
+				if (headerLowerListItemText[i].classList.contains('active')) {
+					headerLowerListItemText[i].classList.remove('active');
 				}
 			}
 		}
@@ -211,14 +214,14 @@ function setActive() {
 		if (!sections[index].classList.contains("active")) {
 			sections[index].classList.add('active');
 		}
-		if (!headerListItemText[index].classList.contains("active")) {
-			headerListItemText[index].classList.add('active');
+		if (!headerLowerListItemText[index].classList.contains("active")) {
+			headerLowerListItemText[index].classList.add('active');
 		}
 		if (window.location.href.indexOf("#" + scrollToLabels[index].id) < 0) {
 			history.replaceState(null, null, "#" +  scrollToLabels[index].id);
 		}
 		var dropDownTitle = document.querySelector(".header-center > a");
-		// var activeItem = document.querySelector(".header__navigation .list > .item > a.active");
+		// var activeItem = document.querySelector(".header__lower__navigation .list > .item > a.active");
 		if (dropDownTitle) {
     		// dropDownTitle.innerHTML = scrollToLabels[index].id + "<i class=\"fas fa-chevron-down\"></i>";			
     		dropDownTitle.innerHTML = scrollToLabels[index].id; // + "<i class=\"arrow1\"></i><i class=\"arrow2\"></i>";			
@@ -248,14 +251,19 @@ function splitInnerText(el) {
 }
 
 function closeMenu(evnt) {
-	if ((isMobile.any) && (((headerNavigation.classList.contains('dropDownOpen')) && !(evnt.target === headerDropDownSelect) && !(evnt.target === headerDropDownMenu)))) {
+	if ((isMobile.any) && (((headerLowerNavigation.classList.contains('dropDownOpen')) && !(evnt.target === headerLowerDropDownSelect) && !(evnt.target === headerLowerDropDownMenu)))) {
 		console.log("a");
 	}
 }
 
-function clickHeaderDropDown(evnt) {
+function clickHeaderLowerDropDown(evnt) {
     onResize(-1);
-	headerNavigation.classList.toggle('dropDownOpen');
+	headerLowerNavigation.classList.toggle('dropDownOpen');
+}
+
+function clickHeaderLowerLogo(evnt) {
+    onResize(-1);
+	headerLower.classList.toggle('openUpperMenu');
 }
 
 function dotHover(evnt) {
