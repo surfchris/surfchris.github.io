@@ -29,7 +29,7 @@ var tl = new gsap.timeline({
 });
 
 headerLowerDropDownSelect.addEventListener("click", clickHeaderLowerDropDown);
-// headerLowerLogo.addEventListener("click", clickHeaderLowerLogo);
+headerLowerLogo.addEventListener("click", clickHeaderLowerLogo);
 document.addEventListener("click", closeMenu);
 window.addEventListener("resize", onResize);
 var resizeTimer;
