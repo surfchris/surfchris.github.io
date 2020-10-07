@@ -16,8 +16,12 @@ var toolTipAnims = [];
 var dotAnims = [];
 
 var headerLowerDropDownSelect = document.querySelector(".header__lower__navigation .header-center .arrowbox");
-var headerLowerLogo = document.querySelector(".header__lower__logo");
 var headerLower = document.querySelector(".header__lower");
+var headerLowerBackground = document.querySelector(".header__lower-background");
+var headerLowerLogo = document.querySelector(".header__lower__logo");
+var headerLowerBurger = document.querySelector(".header__lower__burger");
+var headerLowerSeparatorOne = document.querySelector(".header__lower__separator.one");
+var headerLowerSeparatorTwo = document.querySelector(".header__lower__separator.two");
 var headerLowerList = document.querySelector(".header__lower__navigation .list");
 var headerLowerDropDownMenu = document.querySelector(".header__lower__navigation .items-wrapper");
 var headerLowerNavigation = document.querySelector(".header__lower__navigation");
@@ -263,7 +267,13 @@ function clickHeaderLowerDropDown(evnt) {
 
 function clickHeaderLowerLogo(evnt) {
     onResize(-1);
-	headerLower.classList.toggle('openUpperMenu');
+	headerLowerLogo.classList.toggle('openUpperMenu');
+	headerLowerNavigation.classList.toggle('openUpperMenu');
+	headerLowerBurger.classList.toggle('openUpperMenu');
+	headerLowerBackground.classList.toggle('openUpperMenu');
+	headerLowerSeparatorOne.classList.toggle('openUpperMenu');
+	headerLowerSeparatorTwo.classList.toggle('openUpperMenu');
+
 }
 
 function dotHover(evnt) {

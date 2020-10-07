@@ -10,7 +10,7 @@ $active-color: white;
 $separator-color: #333;
 $header-color: #1a1a1a;
 
-$header-logo-width-mobile: 75px;
+$header-logo-width-mobile: 80px;
 $header-burger-width-mobile: 65px;
 $header-height-mobile: 70px; // this must be changed in JS also
 $header-nav-dropdown-bottom-padding-mobile: 60px; // this must be changed in JS also
@@ -188,7 +188,48 @@ body {
         }
     }
 }
+
 .header {
+    $headerAnimBackgroundStart: 0.25s;
+    $headerAnimBackgroundDuration: 2s;
+    $headerAnimBackgroundDelay: 0.25s;
+
+    $headerAnimItemStart: 0.25s;
+    $headerAnimItemDuration: 1s;
+    $headerAnimItemDuration2: 0.5s;
+    // $headerAnimItemOpacityDurationFactor: 0.5;
+    $headerAnimItemCount: 4;
+    $headerAnimItemDelay: 0.25s / $headerAnimItemCount;
+    $headerAnimItemDelay2: 0.25s / $headerAnimItemCount;
+    $headerAnimItemDelayOffset2: -0.5s;
+    $headerAnimItemDelayOffset1Rev: -1s;
+    
+    $headerTransformYOffset: 10px;
+
+    @keyframes headerAnimItemOpen1 {
+        0% {transform: translateY(0px); opacity: 1;}
+        50% {opacity: 0;}
+        100% {transform: translateY($header-height-mobile - $headerTransformYOffset); opacity: 0;}
+     }
+
+     @keyframes headerAnimItemOpen1Rev {
+        0% {transform: translateY($header-height-mobile - $headerTransformYOffset); opacity: 0;}
+        50% {opacity: 0;}
+        100% {transform: translateY(0px); opacity: 1;}
+     }
+
+     @keyframes headerAnimItemOpen2 {
+        0% {transform: translateY($header-height-mobile - $headerTransformYOffset); opacity: 0;}
+        // 50% {opacity: 1;}
+        100% {transform: translateY($header-height-mobile); opacity: 1;}
+    }
+
+    @keyframes headerAnimItemOpen2Rev {
+        0% {transform: translateY($header-height-mobile); opacity: 1;}
+        90% {opacity: 0;}
+        100% {transform: translateY($header-height-mobile - $headerTransformYOffset); opacity: 0;}
+    }
+
     position: fixed;
     top: 0px;
     left: 0px;
@@ -221,11 +262,20 @@ body {
         }       
     }
 
+    &__upper-background {
+        position: absolute;
+        width: 100%;
+        top: 0px;
+        height: $header-height-mobile;
+        background: blue;
+    }
+
     &__upper {
         position: absolute;
         width: 100%;
+        top: 0px;
         height: $header-height-mobile;
-        background: blue;
+        // background: blue;
 
         display: flex;
         flex-direction: row;
@@ -237,7 +287,7 @@ body {
         transition-delay: 0.2s;
     }
 
-    &__lower {
+    &__lower-background {
         position: absolute;
         left: 0px;
         top: 0px;
@@ -246,26 +296,61 @@ body {
         bottom: calc(100% - #{$header-height-mobile});
         background: $header-color;
 
+        // transition: top $headerAnimBackgroundDuration / 2 cubic-bezier(0.645, 0.045, 0.355, 1.000) $headerAnimBackgroundStart, bottom $headerAnimBackgroundDuration / 2 cubic-bezier(0.645, 0.045, 0.355, 1.000) $headerAnimBackgroundStart + $headerAnimBackgroundDelay;
+        transition: top $headerAnimBackgroundDuration / 2 cubic-bezier(0.700, 0.000, 0.175, 1.000) $headerAnimBackgroundStart, bottom $headerAnimBackgroundDuration / 2 cubic-bezier(0.700, 0.000, 0.175, 1.000) $headerAnimBackgroundStart + $headerAnimBackgroundDelay;
+        // transition: top $headerAnimBackgroundDuration / 2 ease-in-out $headerAnimBackgroundStart, bottom $headerAnimBackgroundDuration / 2 ease-in-out $headerAnimBackgroundStart + $headerAnimBackgroundDelay;
+        // transition-delay: 0.5s;
+
+        &.openUpperMenu {
+            top: $header-height-mobile;
+            // top: 0px;
+            bottom: calc(100% - #{$header-height-mobile} - #{$header-height-mobile});
+            // transition: top $headerAnimBackgroundDuration / 2 cubic-bezier(0.645, 0.045, 0.355, 1.000) $headerAnimBackgroundStart + $headerAnimBackgroundDelay, bottom $headerAnimBackgroundDuration / 2 cubic-bezier(0.645, 0.045, 0.355, 1.000) $headerAnimBackgroundStart;
+            transition: top $headerAnimBackgroundDuration / 2 cubic-bezier(0.700, 0.000, 0.175, 1.000) $headerAnimBackgroundStart + $headerAnimBackgroundDelay, bottom $headerAnimBackgroundDuration / 2 cubic-bezier(0.700, 0.000, 0.175, 1.000) $headerAnimBackgroundStart;
+            // transition: top $headerAnimBackgroundDuration / 2 ease-in-out $headerAnimBackgroundStart + $headerAnimBackgroundDelay, bottom $headerAnimBackgroundDuration / 2 ease-in-out $headerAnimBackgroundStart;
+        }
+
+    }
+
+    &__lower {
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        width: 100%;
+        // height: $header-height-mobile;
+        bottom: calc(100% - #{$header-height-mobile});
+        // background: $header-color;
+
         display: flex;
         flex-direction: row;
         flex-wrap: nowrap;
         align-items: center;
 
-        // transform: scale(1) translateY(0px);
-        transition: top 0.5s ease-in-out 0.5s, bottom 0.5s ease-in-out 0.65s;
-        // transition-delay: 0.5s;
+        // .lower-wrapper {
+        //     position: absolute;
+        //     left: 0px;
+        //     top: 100px;
+        //     width: 100%;
+        //     height: 100%;
+        //     // height: 100%;
 
-        &.openUpperMenu {
-            top: #{$header-height-mobile};
-            bottom: calc(100% - #{$header-height-mobile} - #{$header-height-mobile});
-            transition: top 0.5s ease-in-out 0.65s, bottom 0.5s ease-in-out 0.5s;
+        //     display: flex;
+        //     flex-direction: row;
+        //     flex-wrap: nowrap;
+        //     align-items: center;
+        // }
 
-        }
+    
+
+
+    // }
 
         &__logo {
+            $headerItemNumber: 0;
+
             height: $header-height-mobile;
             width: $header-logo-width-mobile;
-            transition-delay: 2.5s;
+            // transition-delay: 2.5s;
 
             display: flex;
             justify-content: center;
@@ -273,23 +358,35 @@ body {
 
             cursor: pointer;
 
-            // text-align: center;
-            // position: relative;
-            // display: inline-block;
+            // opacity: 1;
+            // transform: translateY(0px);
+            // transition: transform $headerAnimItemDuration ease-in-out $headerAnimItemStart + 4 * $headerAnimItemDelay, opacity $headerAnimItemDuration * $headerAnimItemOpacityDurationFactor ease-in-out $headerAnimItemDuration - $headerAnimItemStart + 4 * $headerAnimItemDelay;
+            // animation: headerAnimItemOpen1 $headerAnimItemDuration ease-in-out $headerAnimItemStart + ( $headerAnimItemCount - $headerItemNumber ) * $headerAnimItemDelay 1 reverse backwards, headerAnimItemOpen2 $headerAnimItemDuration2 ease-in-out $headerAnimItemDuration + $headerAnimItemStart + $headerAnimItemDelay * $headerAnimItemCount + $headerAnimItemDelay2 * $headerItemNumber + $headerAnimItemDelayOffset2 1 reverse both;
+            // animation: headerAnimItemOpen1 0.5s ease-in-out 1s 1;
+            // animation: headerAnimItemOpen1Rev 1s ease-in-out 0.5s 1 normal both;
+            animation: headerAnimItemOpen2Rev $headerAnimItemDuration2 ease-in-out $headerAnimItemStart + ( $headerAnimItemCount - $headerItemNumber ) * $headerAnimItemDelay 1 normal backwards, headerAnimItemOpen1Rev $headerAnimItemDuration ease-in-out $headerAnimItemDuration + $headerAnimItemStart + $headerAnimItemDelay * $headerAnimItemCount + $headerAnimItemDelay2 * $headerItemNumber + $headerAnimItemDelayOffset1Rev 1 normal forwards;
 
-
-            // padding: 0px 0px;
-            // top: 50%;
-            // transform: translateY(-33.33%);
+            // &.closeUpperMenu {
+            // }
+            &.openUpperMenu {
+                // animation-name: headerAnimItem;
+                // animation-duration: 1.5s;
+                // animation-delay: 0.25s;
+                // animation: headerAnimItemOpen1 $headerAnimItemDuration ease-in-out $headerAnimItemStart + ( $headerAnimItemCount - $headerItemNumber ) * $headerAnimItemDelay 1 normal forwards, headerAnimItemOpen2 $headerAnimItemDuration2 ease-in-out $headerAnimItemDuration + $headerAnimItemStart + $headerAnimItemDelay * $headerAnimItemCount + $headerAnimItemDelay2 * $headerItemNumber + $headerAnimItemDelayOffset2 1 normal forwards;
+                // animation: headerAnimItemOpen1 $headerAnimItemDuration ease-in-out $headerAnimItemStart + ( $headerAnimItemCount - $headerItemNumber ) * $headerAnimItemDelay 1 normal forwards;
+                // animation: headerAnimItemOpen1 1s ease-in-out 0.5s 1 normal both;
+                animation: headerAnimItemOpen1 $headerAnimItemDuration ease-in-out $headerAnimItemStart + ( $headerAnimItemCount - $headerItemNumber ) * $headerAnimItemDelay 1 normal backwards, headerAnimItemOpen2 $headerAnimItemDuration2 ease-in-out $headerAnimItemDuration + $headerAnimItemStart + $headerAnimItemDelay * $headerAnimItemCount + $headerAnimItemDelay2 * $headerItemNumber + $headerAnimItemDelayOffset2 1 normal forwards;
+ 
+                // opacity: 0;
+                // transform: translateY($header-height-mobile + $headerTransformYOffset);
+                // transform: translateY($header-height-mobile);
+                // transition: transform $headerAnimItemDuration ease-in-out $headerAnimItemStart + 4 * $headerAnimItemDelay, opacity $headerAnimItemDuration * $headerAnimItemOpacityDurationFactor ease-in-out $headerAnimItemStart + 4 * $headerAnimItemDelay;
+            }
     
-            // @media (min-width: 768px) {
-            //     height: 80%;;
-            
-            // }     
 
             &__svg {
 
-                height: 62%;
+                height: 60%;
                 // transform: translateY(25%);
 
                 opacity: 1;
@@ -309,11 +406,26 @@ body {
             // }
         }
 
-
-
         &__navigation {
+            $headerItemNumber: 2;
+
             height: 100%;
             flex: 1 1;
+            top: 50px;
+
+            // opacity: 1;
+            // transform: translateY(0px);
+            // transition: transform $headerAnimItemDuration ease-in-out $headerAnimItemStart + 2 * $headerAnimItemDelay, opacity $headerAnimItemDuration * $headerAnimItemOpacityDurationFactor ease-in-out $headerAnimItemDuration - $headerAnimItemStart + 2 * $headerAnimItemDelay;
+            animation: headerAnimItemOpen2Rev $headerAnimItemDuration2 ease-in-out $headerAnimItemStart + ( $headerAnimItemCount - $headerItemNumber ) * $headerAnimItemDelay 1 normal backwards, headerAnimItemOpen1Rev $headerAnimItemDuration ease-in-out $headerAnimItemDuration + $headerAnimItemStart + $headerAnimItemDelay * $headerAnimItemCount + $headerAnimItemDelay2 * $headerItemNumber + $headerAnimItemDelayOffset1Rev 1 normal forwards;
+
+            &.openUpperMenu {
+                // opacity: 0;
+                // transform: translateY($header-height-mobile + $headerTransformYOffset);
+                // transition: transform $headerAnimItemDuration ease-in-out $headerAnimItemStart + 2 * $headerAnimItemDelay, opacity $headerAnimItemDuration * $headerAnimItemOpacityDurationFactor ease-in-out $headerAnimItemStart + 2 * $headerAnimItemDelay;
+                // animation: headerAnimItemOpen1 $headerAnimItemDuration ease-in-out $headerAnimItemStart + ( $headerAnimItemCount - $headerItemNumber ) * $headerAnimItemDelay 1 normal forwards;
+                animation: headerAnimItemOpen1 $headerAnimItemDuration ease-in-out $headerAnimItemStart + ( $headerAnimItemCount - $headerItemNumber ) * $headerAnimItemDelay 1 normal forwards, headerAnimItemOpen2 $headerAnimItemDuration2 ease-in-out $headerAnimItemDuration + $headerAnimItemStart + $headerAnimItemDelay * $headerAnimItemCount + $headerAnimItemDelay2 * $headerItemNumber + $headerAnimItemDelayOffset2 1 normal forwards;
+
+            }
 
             .header-center {
                 flex: 1 1;
@@ -545,6 +657,8 @@ body {
         }
 
         &__burger {
+            $headerItemNumber: 4;
+
             height: $header-height-mobile;
             width: $header-burger-width-mobile;
 
@@ -553,16 +667,21 @@ body {
             align-items: center;
  
             cursor: pointer;
-   
-            // position: absolute;
-            // display: inline-block;
-            // text-align: center;
-            // right: 0;
+            
+            // opacity: 1;
+            // transform: translateY(0px);
+            // transition: transform $headerAnimItemDuration ease-in-out $headerAnimItemStart + 0 * $headerAnimItemDelay, opacity $headerAnimItemDuration * $headerAnimItemOpacityDurationFactor ease-in-out $headerAnimItemDuration - $headerAnimItemStart + 0 * $headerAnimItemDelay;
+            animation: headerAnimItemOpen2Rev $headerAnimItemDuration2 ease-in-out $headerAnimItemStart + ( $headerAnimItemCount - $headerItemNumber ) * $headerAnimItemDelay 1 normal backwards, headerAnimItemOpen1Rev $headerAnimItemDuration ease-in-out $headerAnimItemDuration + $headerAnimItemStart + $headerAnimItemDelay * $headerAnimItemCount + $headerAnimItemDelay2 * $headerItemNumber + $headerAnimItemDelayOffset1Rev 1 normal forwards;
 
-            // padding: 15px 0px;
-            // padding-top: 20px;
-            // padding-bottom: 20px;
-        
+            &.openUpperMenu {
+                // opacity: 0;
+                // transform: translateY($header-height-mobile + $headerTransformYOffset);
+                // transition: transform $headerAnimItemDuration ease-in-out $headerAnimItemStart + 0 * $headerAnimItemDelay, opacity $headerAnimItemDuration * $headerAnimItemOpacityDurationFactor ease-in-out $headerAnimItemStart + 0 * $headerAnimItemDelay;
+                // animation: headerAnimItemOpen1 $headerAnimItemDuration ease-in-out $headerAnimItemStart + ( $headerAnimItemCount - $headerItemNumber ) * $headerAnimItemDelay 1 normal forwards;
+                animation: headerAnimItemOpen1 $headerAnimItemDuration ease-in-out $headerAnimItemStart + ( $headerAnimItemCount - $headerItemNumber ) * $headerAnimItemDelay 1 normal forwards, headerAnimItemOpen2 $headerAnimItemDuration2 ease-in-out $headerAnimItemDuration + $headerAnimItemStart + $headerAnimItemDelay * $headerAnimItemCount + $headerAnimItemDelay2 * $headerItemNumber + $headerAnimItemDelayOffset2 1 normal forwards;
+
+            }
+
             &__svg {
                 height: 32%;
                 // transform: translateY(100%);
@@ -588,9 +707,39 @@ body {
             width: 1px;
             height: 50%;
             border-right: 1px solid $separator-color;
+            transform: translateY(0px);
+            opacity: 1;
 
+            &.one {
+                $headerItemNumber: 1;
+                // transition: transform $headerAnimItemDuration ease-in-out $headerAnimItemStart + 3 * $headerAnimItemDelay, opacity $headerAnimItemDuration * $headerAnimItemOpacityDurationFactor ease-in-out $headerAnimItemDuration - $headerAnimItemStart + 3 * $headerAnimItemDelay;
+                animation: headerAnimItemOpen2Rev $headerAnimItemDuration2 ease-in-out $headerAnimItemStart + ( $headerAnimItemCount - $headerItemNumber ) * $headerAnimItemDelay 1 normal backwards, headerAnimItemOpen1Rev $headerAnimItemDuration ease-in-out $headerAnimItemDuration + $headerAnimItemStart + $headerAnimItemDelay * $headerAnimItemCount + $headerAnimItemDelay2 * $headerItemNumber + $headerAnimItemDelayOffset1Rev 1 normal forwards;
+            }
+
+            &.one.openUpperMenu {
+                $headerItemNumber: 1;
+                // opacity: 0;
+                // transform: translateY($header-height-mobile + $headerTransformYOffset);
+                // transition: transform $headerAnimItemDuration ease-in-out $headerAnimItemStart + 3 * $headerAnimItemDelay, opacity $headerAnimItemDuration * $headerAnimItemOpacityDurationFactor ease-in-out $headerAnimItemStart + 3 * $headerAnimItemDelay;
+                // animation: headerAnimItemOpen1 $headerAnimItemDuration ease-in-out $headerAnimItemStart + ( $headerAnimItemCount - $headerItemNumber ) * $headerAnimItemDelay 1 normal forwards;
+                animation: headerAnimItemOpen1 $headerAnimItemDuration ease-in-out $headerAnimItemStart + ( $headerAnimItemCount - $headerItemNumber ) * $headerAnimItemDelay 1 normal forwards, headerAnimItemOpen2 $headerAnimItemDuration2 ease-in-out $headerAnimItemDuration + $headerAnimItemStart + $headerAnimItemDelay * $headerAnimItemCount + $headerAnimItemDelay2 * $headerItemNumber + $headerAnimItemDelayOffset2 1 normal forwards;
+            }
+ 
+            &.two {
+                $headerItemNumber: 3;
+                // transition: transform $headerAnimItemDuration ease-in-out $headerAnimItemStart + 1 * $headerAnimItemDelay, opacity $headerAnimItemDuration * $headerAnimItemOpacityDurationFactor ease-in-out $headerAnimItemDuration - $headerAnimItemStart + 1 * $headerAnimItemDelay;
+                animation: headerAnimItemOpen2Rev $headerAnimItemDuration2 ease-in-out $headerAnimItemStart + ( $headerAnimItemCount - $headerItemNumber ) * $headerAnimItemDelay 1 normal backwards, headerAnimItemOpen1Rev $headerAnimItemDuration ease-in-out $headerAnimItemDuration + $headerAnimItemStart + $headerAnimItemDelay * $headerAnimItemCount + $headerAnimItemDelay2 * $headerItemNumber + $headerAnimItemDelayOffset1Rev 1 normal forwards;
+            }
+           
+            &.two.openUpperMenu {
+                $headerItemNumber: 3;
+                // opacity: 0;
+                // transform: translateY($header-height-mobile + $headerTransformYOffset);
+                // transition: transform $headerAnimItemDuration ease-in-out $headerAnimItemStart + 1 * $headerAnimItemDelay, opacity $headerAnimItemDuration * $headerAnimItemOpacityDurationFactor ease-in-out $headerAnimItemStart + 1 * $headerAnimItemDelay;
+                // animation: headerAnimItemOpen1 $headerAnimItemDuration ease-in-out $headerAnimItemStart + ( $headerAnimItemCount - $headerItemNumber ) * $headerAnimItemDelay 1 normal forwards;
+                animation: headerAnimItemOpen1 $headerAnimItemDuration ease-in-out $headerAnimItemStart + ( $headerAnimItemCount - $headerItemNumber ) * $headerAnimItemDelay 1 normal forwards, headerAnimItemOpen2 $headerAnimItemDuration2 ease-in-out $headerAnimItemDuration + $headerAnimItemStart + $headerAnimItemDelay * $headerAnimItemCount + $headerAnimItemDelay2 * $headerItemNumber 1 normal forwards;
+            }
         }
-    
 
         // &__button {
         //     line-height: 1;
