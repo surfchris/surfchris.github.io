@@ -4,7 +4,7 @@ var bgVideo = document.querySelector(".background__video-container__video");
 var bgVideoSegments = [0, 2, 3, 6, 8, 10, 13, 15, 17, 20];
 
 
-var intro = "Uncompromised Ultra Efficient Turbine Power, the small engine that can";
+var intro = "APS300P Uncompromised Ultra Efficient Turbine Power, the small engine that can";
 
 var dots = document.querySelector(".navigation__container__dots");
 var viewport = document.querySelector(".viewport");
@@ -15,16 +15,18 @@ var content = document.querySelector(".content");
 var toolTipAnims = [];
 var dotAnims = [];
 
-var headerLowerDropDownSelect = document.querySelector(".header__lower__navigation .header-center .arrowbox");
+// var headerLowerDropDownSelect = document.querySelector(".header__lower__navigation");
 var headerLower = document.querySelector(".header__lower");
 var headerLowerBackground = document.querySelector(".header__lower-background");
 var headerLowerLogo = document.querySelector(".header__lower__logo");
 var headerLowerBurger = document.querySelector(".header__lower__burger");
 var headerLowerSeparatorOne = document.querySelector(".header__lower__separator.one");
 var headerLowerSeparatorTwo = document.querySelector(".header__lower__separator.two");
-var headerLowerList = document.querySelector(".header__lower__navigation .list");
-var headerLowerDropDownMenu = document.querySelector(".header__lower__navigation .items-wrapper");
 var headerLowerNavigation = document.querySelector(".header__lower__navigation");
+var headerLowerNavigationTop = document.querySelector(".header__lower__navigation__top");
+var headerLowerNavigationBottom = document.querySelector(".header__lower__navigation__bottom");
+var headerLowerNavigationBottomText = document.querySelector(".header__lower__navigation__bottom > a");
+var headerLowerList = document.querySelector(".header__lower__navigation .list");
 var headerLowerListItems = document.querySelectorAll(".header__lower__navigation .list > .item");
 var headerLowerListItemText = document.querySelectorAll(".header__lower__navigation .list > .item > a");
 
@@ -32,7 +34,7 @@ var tl = new gsap.timeline({
 	paused: true,
 });
 
-headerLowerDropDownSelect.addEventListener("click", clickHeaderLowerDropDown);
+headerLowerNavigation.addEventListener("click", clickHeaderLowerNavigation);
 headerLowerLogo.addEventListener("click", clickHeaderLowerLogo);
 document.addEventListener("click", closeMenu);
 window.addEventListener("resize", onResize);
@@ -224,11 +226,11 @@ function setActive() {
 		if (window.location.href.indexOf("#" + scrollToLabels[index].id) < 0) {
 			history.replaceState(null, null, "#" +  scrollToLabels[index].id);
 		}
-		var dropDownTitle = document.querySelector(".header-center > a");
+		// var dropDownTitle = document.querySelector(".header-center > a");
 		// var activeItem = document.querySelector(".header__lower__navigation .list > .item > a.active");
-		if (dropDownTitle) {
+		if (headerLowerNavigationBottomText) {
     		// dropDownTitle.innerHTML = scrollToLabels[index].id + "<i class=\"fas fa-chevron-down\"></i>";			
-    		dropDownTitle.innerHTML = scrollToLabels[index].id; // + "<i class=\"arrow1\"></i><i class=\"arrow2\"></i>";			
+    		headerLowerNavigationBottomText.innerHTML = scrollToLabels[index].id; // + "<i class=\"arrow1\"></i><i class=\"arrow2\"></i>";			
 		}
 
    	}
@@ -255,14 +257,15 @@ function splitInnerText(el) {
 }
 
 function closeMenu(evnt) {
-	if ((isMobile.any) && (((headerLowerNavigation.classList.contains('dropDownOpen')) && !(evnt.target === headerLowerDropDownSelect) && !(evnt.target === headerLowerDropDownMenu)))) {
-		console.log("a");
-	}
+// 	if ((isMobile.any) && (((headerLowerNavigation.classList.contains('dropDownOpen')) && !(evnt.target === headerLowerDropDownSelect) && !(evnt.target === headerLowerDropDownMenu)))) {
+// 		console.log("pressed");
+// 	}
 }
 
-function clickHeaderLowerDropDown(evnt) {
+function clickHeaderLowerNavigation(evnt) {
     onResize(-1);
-	headerLowerNavigation.classList.toggle('dropDownOpen');
+	headerLowerNavigation.classList.toggle('engineSelect');
+	headerLowerNavigationTop.classList.toggle('engineSelect');
 }
 
 function clickHeaderLowerLogo(evnt) {

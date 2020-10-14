@@ -267,7 +267,7 @@ body {
         width: 100%;
         top: 0px;
         height: $header-height-mobile;
-        background: blue;
+        background: #fff;
     }
 
     &__upper {
@@ -295,19 +295,12 @@ body {
         // height: $header-height-mobile;
         bottom: calc(100% - #{$header-height-mobile});
         background: $header-color;
-
-        // transition: top $headerAnimBackgroundDuration / 2 cubic-bezier(0.645, 0.045, 0.355, 1.000) $headerAnimBackgroundStart, bottom $headerAnimBackgroundDuration / 2 cubic-bezier(0.645, 0.045, 0.355, 1.000) $headerAnimBackgroundStart + $headerAnimBackgroundDelay;
         transition: top $headerAnimBackgroundDuration / 2 cubic-bezier(0.700, 0.000, 0.175, 1.000) $headerAnimBackgroundStart, bottom $headerAnimBackgroundDuration / 2 cubic-bezier(0.700, 0.000, 0.175, 1.000) $headerAnimBackgroundStart + $headerAnimBackgroundDelay;
-        // transition: top $headerAnimBackgroundDuration / 2 ease-in-out $headerAnimBackgroundStart, bottom $headerAnimBackgroundDuration / 2 ease-in-out $headerAnimBackgroundStart + $headerAnimBackgroundDelay;
-        // transition-delay: 0.5s;
 
         &.openUpperMenu {
             top: $header-height-mobile;
-            // top: 0px;
             bottom: calc(100% - #{$header-height-mobile} - #{$header-height-mobile});
-            // transition: top $headerAnimBackgroundDuration / 2 cubic-bezier(0.645, 0.045, 0.355, 1.000) $headerAnimBackgroundStart + $headerAnimBackgroundDelay, bottom $headerAnimBackgroundDuration / 2 cubic-bezier(0.645, 0.045, 0.355, 1.000) $headerAnimBackgroundStart;
             transition: top $headerAnimBackgroundDuration / 2 cubic-bezier(0.700, 0.000, 0.175, 1.000) $headerAnimBackgroundStart + $headerAnimBackgroundDelay, bottom $headerAnimBackgroundDuration / 2 cubic-bezier(0.700, 0.000, 0.175, 1.000) $headerAnimBackgroundStart;
-            // transition: top $headerAnimBackgroundDuration / 2 ease-in-out $headerAnimBackgroundStart + $headerAnimBackgroundDelay, bottom $headerAnimBackgroundDuration / 2 ease-in-out $headerAnimBackgroundStart;
         }
 
     }
@@ -325,25 +318,6 @@ body {
         flex-direction: row;
         flex-wrap: nowrap;
         align-items: center;
-
-        // .lower-wrapper {
-        //     position: absolute;
-        //     left: 0px;
-        //     top: 100px;
-        //     width: 100%;
-        //     height: 100%;
-        //     // height: 100%;
-
-        //     display: flex;
-        //     flex-direction: row;
-        //     flex-wrap: nowrap;
-        //     align-items: center;
-        // }
-
-    
-
-
-    // }
 
         &__logo {
             $headerItemNumber: 0;
@@ -408,10 +382,29 @@ body {
 
         &__navigation {
             $headerItemNumber: 2;
+           
 
             height: 100%;
             flex: 1 1;
-            top: 50px;
+            // top: 50px;
+
+            display: flex;
+            flex-direction: column;
+            flex-wrap: nowrap;
+            align-items: flex-start;
+            justify-content: center;
+
+            cursor: pointer;
+
+            a {
+                width: 100%;
+                // height: 100%;
+                display: flex;
+                padding-left: 15px;
+                font-size: 22px;
+                font-weight: 500; 
+                color: $nonactive-color;
+            }
 
             // opacity: 1;
             // transform: translateY(0px);
@@ -427,41 +420,54 @@ body {
 
             }
 
-            .header-center {
-                flex: 1 1;
-                height: 100%;
-                // width: 100%;
-                // top: 50%;
-                // transform: translateY(50%);
+            &__top {
+                $fontsize: 16px;
+
+                position: relative;
+                width: 100%;
+                height: $header-height-mobile / 2;
+                padding-top: 0.2 * $header-height-mobile;
+                // top: 0px;
                 display: flex;
                 flex-direction: row;
-                flex-wrap: nowrap;
                 align-items: center;
-                justify-content: flex-start;
 
-        
-                > a {
-                    flex: 1 1;
-                    // width: 100%;
-                    height: 100%;
-                    display: flex;
+                
+
+                a {
+                    font-size: $fontsize; 
+                    color: $active-color;
+                    // padding-bottom: 3px;
                     align-items: center;
-                    padding-left: 15px;
-                    font-size: 22px;
-                    font-weight: 500; 
-                    color: $nonactive-color;
+                    // white-space: nowrap;
+                }
+
+                .engine-models {
+                    width: 100%;
+                    height: $fontsize;
+                    overflow: hidden;
+
+                    .engine-models-slider {
+                        width: 100%;
+                        height: $fontsize * 2 + 2px;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: space-between;
+                        transform: translateY(0px);
+                        transition: transform 0.4s ease-in-out 0s;                      
+                    }
                 }
 
                 .arrowbox {
                     // flex: 1 1;
                     width: $header-burger-width-mobile;
-                    transition: background 1s ease-out;
-                    transition-delay: 0.3s;
-                    height: 100%;
+                    // transition: background 1s ease-out;
+                    // transition-delay: 0.3s;
+                    height: $fontsize;
                     display: flex;
                     align-items: center;
                     justify-content: center;
-                    cursor: pointer;
+                    
 
 
                     .arrow {
@@ -472,7 +478,7 @@ body {
                         width: $boxwidth;
                         height: $boxheight;
                         margin-left: 10px;
-                        // margin-bottom: 2px;
+                        margin-bottom: 2px;
                         position: relative;
                         transition: 0.4s ease;
                         transform: rotate(0);
@@ -496,6 +502,69 @@ body {
                             }
                     }
                 }   
+                &.engineSelect {
+
+                    .engine-models {
+    
+                        .engine-models-slider {
+                            transform: translateY(-18px);
+                            transition: transform 0.4s ease-in-out 0s;
+                            
+                        }
+                    }
+
+
+
+                    .arrowbox {
+                        // background-color: #000;
+                        // transition: background 0.5s ease-in;
+                        // transition-delay: 0.1s;
+                        
+
+                        .arrow {
+                            transform: rotate(0);
+                            transform: translate(0, -8px);
+                            &:before {
+                                transform: rotate(-45deg);
+                            }
+                            &:after {
+                                transform: rotate(45deg);
+                            }
+                        }
+                    }
+                }
+
+            }
+            
+            &__center {
+                height: 0px;
+
+                a {
+                    align-items: center;
+                }
+            }
+
+
+            &__bottom {
+                position: relative;
+                // flex: 1 1;
+                // height: 100%;
+                width: 100%;
+                height: $header-height-mobile / 2;
+                // top: $header-height-mobile / 2;
+                padding-bottom: 0.13 * $header-height-mobile;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                // justify-content: flex-start;
+                // top: 0px;
+                // transform: translateY(50%);
+ 
+                a {
+                    // padding-top: 3px;
+                    align-items: flex-start;
+                    // align-items: flex-start;
+                }
             }
 
             .items-wrapper {
@@ -503,7 +572,7 @@ body {
                 // display: flex;
                 background-color: $header-color;
                 overflow: hidden;
-                transition: width 0.6s ease-in-out,height 0.5s ease-out, background 1s ease-out;
+                transition: width 0.6s ease-in-out, height 0.5s ease-out, background 1s ease-out;
                 transition-delay: 0.2s;
                 top: 100%;
                 right: $header-burger-width-mobile;
@@ -602,25 +671,6 @@ body {
             }
             &.dropDownOpen {
 
-                .header-center {
-                    .arrowbox {
-                        background-color: #000;
-                        transition: background 0.5s ease-in;
-                        transition-delay: 0.1s;
-                        
-
-                        .arrow {
-                            transform: rotate(0);
-                            transform: translate(0, -8px);
-                            &:before {
-                                transform: rotate(-45deg);
-                            }
-                            &:after {
-                                transform: rotate(45deg);
-                            }
-                        }
-                    }
-                }
                 .items-wrapper {
                     height: $header-nav-dropdown-menu-height;
                     width: calc(100% - #{$header-burger-width-mobile} - #{$header-logo-width-mobile});
@@ -690,17 +740,6 @@ body {
                 }
             }
 
-            // &::before {
-            //     position: absolute;
-            //     content: "";
-            //     width: 100%;
-            //     height: 50%;
-            //     left: 0;
-            //     top: 50%;
-            //     transform: translateY(-50%);
-            //     border-left: 1px solid $separator-color;      
-            // }
-
         }
 
         &__separator {
@@ -737,7 +776,7 @@ body {
                 // transform: translateY($header-height-mobile + $headerTransformYOffset);
                 // transition: transform $headerAnimItemDuration ease-in-out $headerAnimItemStart + 1 * $headerAnimItemDelay, opacity $headerAnimItemDuration * $headerAnimItemOpacityDurationFactor ease-in-out $headerAnimItemStart + 1 * $headerAnimItemDelay;
                 // animation: headerAnimItemOpen1 $headerAnimItemDuration ease-in-out $headerAnimItemStart + ( $headerAnimItemCount - $headerItemNumber ) * $headerAnimItemDelay 1 normal forwards;
-                animation: headerAnimItemOpen1 $headerAnimItemDuration ease-in-out $headerAnimItemStart + ( $headerAnimItemCount - $headerItemNumber ) * $headerAnimItemDelay 1 normal forwards, headerAnimItemOpen2 $headerAnimItemDuration2 ease-in-out $headerAnimItemDuration + $headerAnimItemStart + $headerAnimItemDelay * $headerAnimItemCount + $headerAnimItemDelay2 * $headerItemNumber 1 normal forwards;
+                animation: headerAnimItemOpen1 $headerAnimItemDuration ease-in-out $headerAnimItemStart + ( $headerAnimItemCount - $headerItemNumber ) * $headerAnimItemDelay 1 normal forwards, headerAnimItemOpen2 $headerAnimItemDuration2 ease-in-out $headerAnimItemDuration + $headerAnimItemStart + $headerAnimItemDelay * $headerAnimItemCount + $headerAnimItemDelay2 * $headerItemNumber + $headerAnimItemDelayOffset2 1 normal forwards;
             }
         }
 
