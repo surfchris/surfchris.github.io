@@ -4,7 +4,7 @@ var bgVideo = document.querySelector(".background__video-container__video");
 var bgVideoSegments = [0, 2, 3, 6, 8, 10, 13, 15, 17, 20];
 
 
-var intro = "APS300P Uncompromised Ultra Efficient Turbine Power, the small engine that can";
+var intro = "ÆOS M300 Uncompromised Ultra Efficient Turbine Power, the small engine that can";
 
 var dots = document.querySelector(".navigation__container__dots");
 var viewport = document.querySelector(".viewport");
@@ -26,16 +26,20 @@ var headerLowerNavigation = document.querySelector(".header__lower__navigation")
 var headerLowerNavigationTop = document.querySelector(".header__lower__navigation__top");
 var headerLowerNavigationBottom = document.querySelector(".header__lower__navigation__bottom");
 var headerLowerNavigationBottomText = document.querySelector(".header__lower__navigation__bottom > a");
+var headerLowerNavigationWrapper = document.querySelector(".header__lower__navigation .navigation-wrapper");
 var headerLowerList = document.querySelector(".header__lower__navigation .list");
 var headerLowerListItems = document.querySelectorAll(".header__lower__navigation .list > .item");
 var headerLowerListItemText = document.querySelectorAll(".header__lower__navigation .list > .item > a");
+var headerLowerItemsWrapper = document.querySelector(".header__lower__navigation .items-wrapper");
+
 
 var tl = new gsap.timeline({
 	paused: true,
 });
 
-headerLowerNavigation.addEventListener("click", clickHeaderLowerNavigation);
 headerLowerLogo.addEventListener("click", clickHeaderLowerLogo);
+headerLowerNavigationWrapper.addEventListener("click", clickHeaderLowerNavigationWrapper);
+headerLowerBurger.addEventListener("click", clickHeaderLowerBurger)
 document.addEventListener("click", closeMenu);
 window.addEventListener("resize", onResize);
 var resizeTimer;
@@ -48,7 +52,7 @@ var styleSheet = document.styleSheets[0].cssRules;
 var ccsDropDownHeightRuleIndex = [];
 var counter = 0;
 for (var i = 0; i < styleSheet.length; i++) {
-    if (styleSheet[i].selectorText == ".header__lower__navigation.dropDownOpen .items-wrapper") {
+    if (styleSheet[i].selectorText == ".header__lower__navigation .items-wrapper.openBurgerMenu") {
 		ccsDropDownHeightRuleIndex[counter] = i;
 		counter++;
     	// break;
@@ -65,8 +69,6 @@ var pinning = 2, // 1 second = 100vh
 	contentDurationStart = 0;
 
 var isLoading = true;
-
-
 
 // bgVideo.pause();
 // bgVideo.currentTime = 0;
@@ -173,7 +175,7 @@ function onResize(evnt) {
 		if (evnt != -1) {
 			document.body.classList.add("resize-animation-stopper");
 			clearTimeout(resizeTimer);
-			resizeTimer = setTimeout(function(){ document.body.classList.remove("resize-animation-stopper"); }, 500);
+			resizeTimer = setTimeout(function(){ document.body.classList.remove("resize-animation-stopper"); }, 1000);
 		}
 		if (height > width) {
 			if (height < (headerLowerHeightMobile + headerLowerNavDropdownBottomPaddingMobile + headerLowerNavDropdownMenuHeight)) {
@@ -262,12 +264,6 @@ function closeMenu(evnt) {
 // 	}
 }
 
-function clickHeaderLowerNavigation(evnt) {
-    onResize(-1);
-	headerLowerNavigation.classList.toggle('engineSelect');
-	headerLowerNavigationTop.classList.toggle('engineSelect');
-}
-
 function clickHeaderLowerLogo(evnt) {
     onResize(-1);
 	headerLowerLogo.classList.toggle('openUpperMenu');
@@ -277,6 +273,18 @@ function clickHeaderLowerLogo(evnt) {
 	headerLowerSeparatorOne.classList.toggle('openUpperMenu');
 	headerLowerSeparatorTwo.classList.toggle('openUpperMenu');
 
+}
+
+function clickHeaderLowerNavigationWrapper(evnt) {
+    onResize(-1);
+	// headerLowerNavigation.classList.toggle('engineSelect');
+	headerLowerNavigationTop.classList.toggle('engineSelect');
+}
+
+function clickHeaderLowerBurger(evnt) {
+    onResize(-1);
+	headerLowerItemsWrapper.classList.toggle('openBurgerMenu');
+	headerLowerBurger.classList.toggle('openBurgerMenu');
 }
 
 function dotHover(evnt) {

@@ -214,13 +214,13 @@ body {
 
      @keyframes headerAnimItemOpen1Rev {
         0% {transform: translateY($header-height-mobile - $headerTransformYOffset); opacity: 0;}
-        50% {opacity: 0;}
+        70% {opacity: 0;}
         100% {transform: translateY(0px); opacity: 1;}
      }
 
      @keyframes headerAnimItemOpen2 {
         0% {transform: translateY($header-height-mobile - $headerTransformYOffset); opacity: 0;}
-        // 50% {opacity: 1;}
+        70% {opacity: 1;}
         100% {transform: translateY($header-height-mobile); opacity: 1;}
     }
 
@@ -332,36 +332,17 @@ body {
 
             cursor: pointer;
 
-            // opacity: 1;
-            // transform: translateY(0px);
-            // transition: transform $headerAnimItemDuration ease-in-out $headerAnimItemStart + 4 * $headerAnimItemDelay, opacity $headerAnimItemDuration * $headerAnimItemOpacityDurationFactor ease-in-out $headerAnimItemDuration - $headerAnimItemStart + 4 * $headerAnimItemDelay;
-            // animation: headerAnimItemOpen1 $headerAnimItemDuration ease-in-out $headerAnimItemStart + ( $headerAnimItemCount - $headerItemNumber ) * $headerAnimItemDelay 1 reverse backwards, headerAnimItemOpen2 $headerAnimItemDuration2 ease-in-out $headerAnimItemDuration + $headerAnimItemStart + $headerAnimItemDelay * $headerAnimItemCount + $headerAnimItemDelay2 * $headerItemNumber + $headerAnimItemDelayOffset2 1 reverse both;
-            // animation: headerAnimItemOpen1 0.5s ease-in-out 1s 1;
-            // animation: headerAnimItemOpen1Rev 1s ease-in-out 0.5s 1 normal both;
             animation: headerAnimItemOpen2Rev $headerAnimItemDuration2 ease-in-out $headerAnimItemStart + ( $headerAnimItemCount - $headerItemNumber ) * $headerAnimItemDelay 1 normal backwards, headerAnimItemOpen1Rev $headerAnimItemDuration ease-in-out $headerAnimItemDuration + $headerAnimItemStart + $headerAnimItemDelay * $headerAnimItemCount + $headerAnimItemDelay2 * $headerItemNumber + $headerAnimItemDelayOffset1Rev 1 normal forwards;
 
             // &.closeUpperMenu {
             // }
             &.openUpperMenu {
-                // animation-name: headerAnimItem;
-                // animation-duration: 1.5s;
-                // animation-delay: 0.25s;
-                // animation: headerAnimItemOpen1 $headerAnimItemDuration ease-in-out $headerAnimItemStart + ( $headerAnimItemCount - $headerItemNumber ) * $headerAnimItemDelay 1 normal forwards, headerAnimItemOpen2 $headerAnimItemDuration2 ease-in-out $headerAnimItemDuration + $headerAnimItemStart + $headerAnimItemDelay * $headerAnimItemCount + $headerAnimItemDelay2 * $headerItemNumber + $headerAnimItemDelayOffset2 1 normal forwards;
-                // animation: headerAnimItemOpen1 $headerAnimItemDuration ease-in-out $headerAnimItemStart + ( $headerAnimItemCount - $headerItemNumber ) * $headerAnimItemDelay 1 normal forwards;
-                // animation: headerAnimItemOpen1 1s ease-in-out 0.5s 1 normal both;
                 animation: headerAnimItemOpen1 $headerAnimItemDuration ease-in-out $headerAnimItemStart + ( $headerAnimItemCount - $headerItemNumber ) * $headerAnimItemDelay 1 normal backwards, headerAnimItemOpen2 $headerAnimItemDuration2 ease-in-out $headerAnimItemDuration + $headerAnimItemStart + $headerAnimItemDelay * $headerAnimItemCount + $headerAnimItemDelay2 * $headerItemNumber + $headerAnimItemDelayOffset2 1 normal forwards;
- 
-                // opacity: 0;
-                // transform: translateY($header-height-mobile + $headerTransformYOffset);
-                // transform: translateY($header-height-mobile);
-                // transition: transform $headerAnimItemDuration ease-in-out $headerAnimItemStart + 4 * $headerAnimItemDelay, opacity $headerAnimItemDuration * $headerAnimItemOpacityDurationFactor ease-in-out $headerAnimItemStart + 4 * $headerAnimItemDelay;
             }
     
 
             &__svg {
-
                 height: 60%;
-                // transform: translateY(25%);
 
                 opacity: 1;
                 fill: $active-color;
@@ -382,7 +363,6 @@ body {
 
         &__navigation {
             $headerItemNumber: 2;
-           
 
             height: 100%;
             flex: 1 1;
@@ -394,7 +374,14 @@ body {
             align-items: flex-start;
             justify-content: center;
 
-            cursor: pointer;
+            // cursor: pointer;
+            // -webkit-tap-highlight-color: #000;
+
+            .navigation-wrapper {
+                height: 100%;
+                width: 100%;
+                cursor: pointer;
+            }
 
             a {
                 width: 100%;
@@ -448,6 +435,7 @@ body {
                     overflow: hidden;
 
                     .engine-models-slider {
+                        
                         width: 100%;
                         height: $fontsize * 2 + 2px;
                         display: flex;
@@ -568,19 +556,37 @@ body {
             }
 
             .items-wrapper {
+
+                $header-logo-width-mobile-delta: 15px;
+
                 position: absolute;
-                // display: flex;
-                background-color: $header-color;
+                // display: flex;   
+                background-color: $header-color; // rgba(26, 26, 26, 1); 
                 overflow: hidden;
-                transition: width 0.6s ease-in-out, height 0.5s ease-out, background 1s ease-out;
-                transition-delay: 0.2s;
-                top: 100%;
-                right: $header-burger-width-mobile;
-                height: 0px;
+                transition: width 0.75s cubic-bezier(0.700, 0.000, 0.175, 1.000) 0.1s, background 0.75s ease-out 0.0s; //cubic-bezier(0.700, 0.000, 0.175, 1.000)
+                // transition-delay: 0.1s;
+                top: $header-height-mobile - 0.5px;
+                right: -1px - $header-burger-width-mobile;
+                height: calc(100vh - #{$header-height-mobile});
+                width: 0px; //calc(100vw - #{$header-logo-width-mobile});
+                // max-width: 275px;
+                // width: 100%;
                 // width: calc(100% - #{$header-burger-width-mobile} - #{$header-logo-width-mobile});
-                width: $header-burger-width-mobile;
-                max-width: 275px;
-                // min-width: 220px;
+
+                // width: $header-burger-width-mobile;
+                
+
+                // position: absolute;
+                // background-color: $header-color;
+                // overflow: hidden;
+                // transition: width 0.6s ease-in-out, height 0.5s ease-out, background 1s ease-out;
+                // transition-delay: 0.2s;
+                // top: 100%;
+                // right: $header-burger-width-mobile;
+                // height: 0px;
+                // width: $header-burger-width-mobile;
+                // max-width: 275px;
+
 
 
                 // @media (min-width: 360px) {
@@ -592,105 +598,105 @@ body {
                 // }
 
                 > .list {     
-                    // width: calc(100% + #{$header-burger-width-mobile} - 20px);
-                    width: 100%;
-                    // max-width: 350px;
-                    // min-width: 180px;
-                    position: absolute;
-                    height: 440px;
+                    width: calc(100vw - #{$header-logo-width-mobile} - #{$header-logo-width-mobile-delta});
 
-                    // top: calc( 100% - 10px);
-                    // display: block;
+
+                    @media (max-width: 330px) {
+                        padding-right: calc(100vw - 330px + 40px);
+                        width: 220px;
+                    }
+               
+                    @media (min-width: 500px) {
+                        width: 400px;
+                    }
+            
+
+                    // width: 100%;
+                    right: 0px;
+                    position: absolute;
+                    height: calc(100% - 60px);
+
                     display: flex;
                     flex-direction: column;
                     flex-wrap: nowrap;
                     justify-content: space-evenly;
-                    // align-items: stretch;
-                    // align-content: center;
-                    // padding: 10px 40px 40px 40px;
-                    padding: 0px 40px;
-                    // margin: 10px 0;
-                    // left: 0px;
+                    padding-left: 40px;
+                    padding-right: 40px;
                     list-style: none;
-
-
-
 
                     > .item {
                         flex: 3 3;
                         border-bottom: 1px solid $separator-color;
-                        transform: scale(1.15) translateY(-30px);
+                        transform: scale(1.15) translateX(75%);
                         opacity: 0;
-                        transition: transform 0.5s $cubic, opacity 0.6s $cubic;
+                        transition: transform 0.5s $cubic, opacity 0.35s $cubic;
                         display: flex;
                         flex-direction: column;
                         justify-content: center;
 
+                        cursor: pointer;
+
+                        &:nth-child(1) {
+                            border-top: 1px solid $separator-color;
+                        }
                         @for $i from 1 through $number-of-slides {
                             &:nth-child(#{$i}) {
-                                transition-delay: #{0.56 - ($i * 0.07)}s;
+                                transition-delay: #{0.40 - ($i * 0.05)}s;
                             }
-                        }
-                
+                        }                        
+
                         > a {
                             
                             display: flex;
-                            // flex-direction: column;
-                            // justify-content: center;
                             align-items: center;
                             height: 100%;
-                            // width: 100%;
-                            // display: block;
-                            // position: relative;
-                            // flex: 1 1;
                             color: $hover-color;
-                            // font-family: $mukta;
-                            // text-decoration: none;
                             font-size: 22px;
-                            // line-height: 2.5;
-                            // height: 50px;
-                            // font-weight: 200;
 
                             &:hover {
                                 color: $hover-color;
                             }
 
                             &.active {
-                                color: $active-color;
-                                
+                                color: $active-color;      
                             }
                         }
                     }
 
                     &::after {
                         content: "";
-                        // height: 40px;
                         flex: 2 2;
                     }
                 }
-            }
-            &.dropDownOpen {
+                &.openBurgerMenu {
 
-                .items-wrapper {
-                    height: $header-nav-dropdown-menu-height;
-                    width: calc(100% - #{$header-burger-width-mobile} - #{$header-logo-width-mobile});
-                    background-color:  #000;
-                    transition: width 0.3s ease-in-out, height 0.3s ease-in, background 0.5s ease-in;
-                    transition-delay: 0.25s;
+                    // height: $header-nav-dropdown-menu-height;
+                    width: calc(100vw - #{$header-logo-width-mobile} - #{$header-logo-width-mobile-delta});
 
-                    .item {
-                        transform: scale(1) translateY(0px);
-                        opacity: 1;
-                        @for $i from 1 through $number-of-slides {
-                            &:nth-child(#{$i}) {
-                                transition-delay: #{0.07 * $i+0.2}s;
+                    @media (max-width: 330px) {
+                             width: 220px;
+                    }
+
+                    @media (min-width: 500px) {
+                        width: 400px;
+                    }
+
+                    background-color:  $header-color; // #000;
+                    // transition: width 0.75s cubic-bezier(0.700, 0.000, 0.175, 1.000) 0.1s, background 0.75s ease-in 0.5s;
+                    transition-delay: 0.1s;
+
+                    .list {
+
+                        .item {
+                            transform: scale(1) translateX(0px);
+                            opacity: 1;
+                            @for $i from 1 through $number-of-slides {
+                                &:nth-child(#{$i}) {
+                                    transition-delay: #{0.05 * $i+0.1}s;
+                                }
                             }
-                        }
-                        // > a {
-                        //     @media (max-height: $header-nav-dropdown-bottom-padding-mobile + $header-nav-dropdown-menu-height + $header-height-mobile) {
-                        //         // line-height: 10.6vh;
-                        //     }
-                    }   
+                        } 
+                    }  
                 }
             }   
 
@@ -709,13 +715,17 @@ body {
         &__burger {
             $headerItemNumber: 4;
 
-            height: $header-height-mobile;
+            height: 100%; //$header-height-mobile;
+            // top: 0px;
+            // bottom: $header-height-mobile;
             width: $header-burger-width-mobile;
 
             display: flex;
             justify-content: center;
             align-items: center;
- 
+            
+            // background: $header-color;
+
             cursor: pointer;
             
             // opacity: 1;
@@ -730,6 +740,10 @@ body {
                 // animation: headerAnimItemOpen1 $headerAnimItemDuration ease-in-out $headerAnimItemStart + ( $headerAnimItemCount - $headerItemNumber ) * $headerAnimItemDelay 1 normal forwards;
                 animation: headerAnimItemOpen1 $headerAnimItemDuration ease-in-out $headerAnimItemStart + ( $headerAnimItemCount - $headerItemNumber ) * $headerAnimItemDelay 1 normal forwards, headerAnimItemOpen2 $headerAnimItemDuration2 ease-in-out $headerAnimItemDuration + $headerAnimItemStart + $headerAnimItemDelay * $headerAnimItemCount + $headerAnimItemDelay2 * $headerItemNumber + $headerAnimItemDelayOffset2 1 normal forwards;
 
+            }
+
+            &.openBurgerMenu {
+                // background: #000;
             }
 
             &__svg {
@@ -803,7 +817,11 @@ body {
 
 .resize-animation-stopper * {
     animation: none !important;
+    animation-duration: 0ms !important;
+    animation-delay: -10s !important;
     transition: none !important;
+    transition-duration: 0ms !important;
+    transition-delay: 0ms !important;
 }
 
 .scrollTo_label {
