@@ -152,29 +152,52 @@
 			</nav>
 			</div>
 		<header class="header" id="header">
-			<div class="header__upper-background"></div>
+			<!-- <div class="header__upper-background"></div> -->
 			<div class="header__upper" id="header__upper">
-				<a>Test</a>
 				<div class="header__upper__logo">
-					<!-- <img class="headerUpper__logo__svg" src="media/aerelia-logo3-white.svg" alt="aerelia">  -->
+					<img class="logo-icon" src="media/aerelia-logo3-black.svg" alt="aerelia"> 
 				</div>			
-				<div class="header__upper__separator one"></div>     
+				<!-- <div class="header__upper__separator"></div>      -->
 				<nav class="header__upper__navigation">
+					<ul class="list" > 						
+						<li class="item"> 
+							<a href="#About" data-menuanchor="About">About</a> 
+						</li>
+						<li class="item"> 
+							<a href="#Vision" data-menuanchor="Vision">Mission</a> 
+						</li>
+						<!-- <li class="item"> 
+							<a href="#Contact" data-menuanchor="Contact">Contact</a> 
+						</li> -->
+					</ul>
+
+					<div class="header__upper__navigation__window" id="header__upper__navigation__window">
+
+					</div>                          
 				</nav>
+				<!-- <div class="header__upper__separator"></div>      -->
+				<div class="header__upper__contact">
+					<div class="button">
+						<img class="contact-icon" src="media/mail-icon.svg" alt="Contact"> 
+						<!-- <a href="#Button" data-menuanchor="Button">Contact</a> -->
+					</div>
+				</div>     
+
 			</div>
-			<div class="header__lower-background"></div>		
+			<!-- <div class="header__lower-background"></div>		 -->
 			<div class="header__lower" id="header__lower">
-				<div class="header__lower__logo"> 
-					<img class="header__lower__logo__svg" src="media/aerelia-logo3-white.svg" alt="aerelia"> 
+				<div class="header__lower__logo header__lower__item"> 
+					<img class="header__lower__logo__svg" src="media/aerelia-logo3-white.svg" alt="Aerelia"> 
+					<img class="header__lower__logo__pic" src="media/rr.png" alt="Close"> 
 				</div>                
-				<div class="header__lower__separator one"></div>     
-				<nav class="header__lower__navigation">
+				<div class="header__lower__separator-one header__lower__item"></div>     
+				<nav class="header__lower__navigation header__lower__item">
 					<div class="navigation-wrapper">
 						<div class="header__lower__navigation__top">
 							<div class="engine-models">
 								<div class="engine-models-slider">
 									<a>Rolls Royce M250</a>
-									<a>ÆOS M300</a>
+									<a>ÆOS300</a>
 								</div>							
 							</div>
 							<div class="arrowbox">
@@ -185,48 +208,51 @@
 						</div> -->
 						<div class="header__lower__navigation__bottom">
 							<a>Engine</a>
-						</div>     
-						<div class="items-wrapper">
-							<ul class="list" > 						
-								<!-- <li class="header__navigation__list__item">  -->
-								<li class="item"> 
-										<a href="#Engine" data-menuanchor="Engine">Engine</a> 
-								</li>                             
-								<!-- <li  class="header__navigation__list__item">  -->
-								<li  class="item"> 
-										<a href="#Compressor" data-menuanchor="Compressor">Compressor</a> 
-								</li>                             
-								<!-- <li class="header__navigation__list__item">  -->
-								<li class="item"> 
-										<a href="#Turbine" data-menuanchor="Turbine">Turbine</a> 
-								</li>                             
-								<!-- <li class="header__navigation__list__item">  -->
-								<li class="item"> 
-										<a href="#Gearbox" data-menuanchor="Gearbox">Gearbox</a> 
-								</li>                             
-								<!-- <li class="header__navigation__list__item">  -->
-								<li class="item"> 
-										<a href="#Recuperator" data-menuanchor="Recuperator">Recuperator</a> 
-								</li>                             
-								<!-- <li class="header__navigation__list__item">  -->
-								<li class="item"> 
-										<a href="#Performance" data-menuanchor="Performance">Performance</a> 
-								</li>                             
-								<!-- <li class="header__navigation__list__item">  -->
-								<li class="item"> 
-										<a href="#Something" data-menuanchor="Performance">Performance</a> 
-								</li>                             
-							</ul>
-						</div>
+						</div> 
+					</div>    
+					<div class="items-wrapper" id="items-wrapper">
+						<ul class="list" > 						
+							<!-- <li class="header__navigation__list__item">  -->
+							<li class="item"> 
+									<a href="#Engine" data-menuanchor="Engine">Engine</a> 
+							</li>                             
+							<!-- <li  class="header__navigation__list__item">  -->
+							<li  class="item"> 
+									<a href="#Compressor" data-menuanchor="Compressor">Compressor</a> 
+							</li>                             
+							<!-- <li class="header__navigation__list__item">  -->
+							<li class="item"> 
+									<a href="#Turbine" data-menuanchor="Turbine">Turbine</a> 
+							</li>                             
+							<!-- <li class="header__navigation__list__item">  -->
+							<li class="item"> 
+									<a href="#Gearbox" data-menuanchor="Gearbox">Gearbox</a> 
+							</li>                             
+							<!-- <li class="header__navigation__list__item">  -->
+							<li class="item"> 
+									<a href="#Recuperator" data-menuanchor="Recuperator">Recuperator</a> 
+							</li>                             
+							<!-- <li class="header__navigation__list__item">  -->
+							<li class="item"> 
+									<a href="#Performance" data-menuanchor="Performance">Performance</a> 
+							</li>                             
+							<!-- <li class="header__navigation__list__item">  -->
+							<li class="item"> 
+									<a href="#Something" data-menuanchor="Performance">Performance</a> 
+							</li>                             
+						</ul>
 					</div>
 				</nav>
-				<div class="header__lower__separator two"></div>
-				<div class="header__lower__burger" >
-					<svg viewBox="0 0 80 70" class="header__lower__burger__svg" >
+				<div class="header__lower__separator-two header__lower__item"></div>
+				<div class="header__lower__burger header__lower__item" >
+					<div class="icon">
+						<div></div>
+					</div>
+					<!-- <svg viewBox="0 0 80 70" class="header__lower__burger__svg" >
 						<rect y='0'  width="80" height="10" rx="5"></rect>
 						<rect y="30" width="80" height="10" rx="5"></rect>
 						<rect y="60" width="80" height="10" rx="5"></rect>
-					</svg>
+					</svg> -->
 				</div>
 					
 				<!-- <a class="header__button" href="https://www.google.com" target="_blank">  <span>Contact</span>  </a>  -->

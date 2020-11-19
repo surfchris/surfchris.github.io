@@ -1,7 +1,9 @@
-@import url(https://fonts.googleapis.com/css?family=Ek+Mukta:200);
+// @import url(https://fonts.googleapis.com/css?family=Ek+Mukta:200);
+@import url('https://fonts.googleapis.com/css2?family=Ek+Mukta:wght@200;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap');
 
-
-$mukta: 'Ek Mukta', sans-serif;;
+$mukta: 'Ek Mukta', sans-serif;
+$montserrat: 'Montserrat', sans-serif;
 $cubic: cubic-bezier(0.4, 0.01, 0.165, 0.99);
 
 $nonactive-color: grey;
@@ -11,11 +13,12 @@ $separator-color: #333;
 $header-color: #1a1a1a;
 
 $header-logo-width-mobile: 80px;
+$header-logo-width-mobile-delta: 15px;
 $header-burger-width-mobile: 65px;
 $header-height-mobile: 70px; // this must be changed in JS also
 $header-nav-dropdown-bottom-padding-mobile: 60px; // this must be changed in JS also
 
-$header-nav-dropdown-menu-height: 440px; // this must be changed in JS also
+// $header-nav-dropdown-menu-height: 440px; // this must be changed in JS also
 $number-of-slides: 7;
 
 html {
@@ -25,6 +28,7 @@ html {
 body {
     overflow-x: hidden;
     overflow-y: scroll;
+    overscroll-behavior: none;
     //  height: 2000vh; 
     height: 100vh;
     //  font: 10px/1.5 "Montserrat", sans-serif; 
@@ -33,10 +37,10 @@ body {
     font-size: 16px;
     line-height: 1;
     font-weight: 500;
-    background: green; //#000000;
+    background: black; //green; //#000000;
 
     @media (min-width: 1024px) {
-        background:  green; //#000000;
+        background:  black; //green; //#000000;
     }
 
     &::-webkit-scrollbar-track {
@@ -53,6 +57,49 @@ body {
         background-color: #000000;
     }  
 }
+
+// .blur > *:not(#items-wrapper), .header__lower__separator {
+//     filter: none; //blur(3px);
+// }
+
+
+// .overlay {
+//         position:absolute;
+//         /* color with alpha transparency */
+//         background-color: red;
+//         /* stretch to screen edges */
+//         top: 0;
+//         left: 0;
+//         bottom: 0;
+//         right: 0;
+//         z-index: 100000;
+//     }
+// .header__lower__navigation > *:not(#items-wrapper) {
+//     filter: blur(1px);
+//   }
+
+// .header__lower__logo {
+//     filter: blur(1px);
+//   }
+
+
+//   .header__lower__separator {
+//     filter: blur(1px);
+//   }
+
+//   .navigation {
+//     filter: blur(1px);
+//   }
+
+
+//   .content {
+//     filter: blur(1px);
+//   }
+
+//   .backgrond {
+//     filter: blur(1px);
+//   }
+
 
 .viewport {
     overflow: hidden;
@@ -80,6 +127,7 @@ body {
     overflow: hidden;
     flex-direction: row;
     align-items:flex-end;
+    background: green;
 
     &__video-container {
         flex: 1;
@@ -190,55 +238,17 @@ body {
 }
 
 .header {
-    $headerAnimBackgroundStart: 0.25s;
-    $headerAnimBackgroundDuration: 2s;
-    $headerAnimBackgroundDelay: 0.25s;
-
-    $headerAnimItemStart: 0.25s;
-    $headerAnimItemDuration: 1s;
-    $headerAnimItemDuration2: 0.5s;
-    // $headerAnimItemOpacityDurationFactor: 0.5;
-    $headerAnimItemCount: 4;
-    $headerAnimItemDelay: 0.25s / $headerAnimItemCount;
-    $headerAnimItemDelay2: 0.25s / $headerAnimItemCount;
-    $headerAnimItemDelayOffset2: -0.5s;
-    $headerAnimItemDelayOffset1Rev: -1s;
-    
-    $headerTransformYOffset: 10px;
-
-    @keyframes headerAnimItemOpen1 {
-        0% {transform: translateY(0px); opacity: 1;}
-        50% {opacity: 0;}
-        100% {transform: translateY($header-height-mobile - $headerTransformYOffset); opacity: 0;}
-     }
-
-     @keyframes headerAnimItemOpen1Rev {
-        0% {transform: translateY($header-height-mobile - $headerTransformYOffset); opacity: 0;}
-        70% {opacity: 0;}
-        100% {transform: translateY(0px); opacity: 1;}
-     }
-
-     @keyframes headerAnimItemOpen2 {
-        0% {transform: translateY($header-height-mobile - $headerTransformYOffset); opacity: 0;}
-        70% {opacity: 1;}
-        100% {transform: translateY($header-height-mobile); opacity: 1;}
-    }
-
-    @keyframes headerAnimItemOpen2Rev {
-        0% {transform: translateY($header-height-mobile); opacity: 1;}
-        90% {opacity: 0;}
-        100% {transform: translateY($header-height-mobile - $headerTransformYOffset); opacity: 0;}
-    }
-
     position: fixed;
     top: 0px;
     left: 0px;
     width: 100%;
+    height: $header-height-mobile;
     // height: 100%;
  
-    // display: flex;
-    // flex-direction: column;
-    // flex-wrap: nowrap;
+    // display: block;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
     // justify-content: flex-start;
 
  
@@ -262,120 +272,279 @@ body {
         }       
     }
 
-    &__upper-background {
-        position: absolute;
-        width: 100%;
-        top: 0px;
-        height: $header-height-mobile;
-        background: #fff;
-    }
-
     &__upper {
-        position: absolute;
         width: 100%;
-        top: 0px;
-        height: $header-height-mobile;
-        // background: blue;
-
-        display: flex;
-        flex-direction: row;
-        flex-wrap: nowrap;
-        align-items: center;
-
+        height: 0px;
+        background: #fff;
         overflow: hidden;
-        transition: height 2s ease-out;
-        transition-delay: 0.2s;
-    }
-
-    &__lower-background {
-        position: absolute;
-        left: 0px;
-        top: 0px;
-        width: 100%;
-        // height: $header-height-mobile;
-        bottom: calc(100% - #{$header-height-mobile});
-        background: $header-color;
-        transition: top $headerAnimBackgroundDuration / 2 cubic-bezier(0.700, 0.000, 0.175, 1.000) $headerAnimBackgroundStart, bottom $headerAnimBackgroundDuration / 2 cubic-bezier(0.700, 0.000, 0.175, 1.000) $headerAnimBackgroundStart + $headerAnimBackgroundDelay;
-
-        &.openUpperMenu {
-            top: $header-height-mobile;
-            bottom: calc(100% - #{$header-height-mobile} - #{$header-height-mobile});
-            transition: top $headerAnimBackgroundDuration / 2 cubic-bezier(0.700, 0.000, 0.175, 1.000) $headerAnimBackgroundStart + $headerAnimBackgroundDelay, bottom $headerAnimBackgroundDuration / 2 cubic-bezier(0.700, 0.000, 0.175, 1.000) $headerAnimBackgroundStart;
-        }
-
-    }
-
-    &__lower {
-        position: absolute;
-        left: 0px;
-        top: 0px;
-        width: 100%;
-        // height: $header-height-mobile;
-        bottom: calc(100% - #{$header-height-mobile});
-        // background: $header-color;
-
-        display: flex;
-        flex-direction: row;
-        flex-wrap: nowrap;
-        align-items: center;
 
         &__logo {
-            $headerItemNumber: 0;
-
+            position: absolute;
+            top: 0px;
+            left: 0px;
             height: $header-height-mobile;
             width: $header-logo-width-mobile;
-            // transition-delay: 2.5s;
-
             display: flex;
             justify-content: center;
             align-items: center;
+            // cursor: pointer;    
 
-            cursor: pointer;
-
-            animation: headerAnimItemOpen2Rev $headerAnimItemDuration2 ease-in-out $headerAnimItemStart + ( $headerAnimItemCount - $headerItemNumber ) * $headerAnimItemDelay 1 normal backwards, headerAnimItemOpen1Rev $headerAnimItemDuration ease-in-out $headerAnimItemDuration + $headerAnimItemStart + $headerAnimItemDelay * $headerAnimItemCount + $headerAnimItemDelay2 * $headerItemNumber + $headerAnimItemDelayOffset1Rev 1 normal forwards;
-
-            // &.closeUpperMenu {
-            // }
-            &.openUpperMenu {
-                animation: headerAnimItemOpen1 $headerAnimItemDuration ease-in-out $headerAnimItemStart + ( $headerAnimItemCount - $headerItemNumber ) * $headerAnimItemDelay 1 normal backwards, headerAnimItemOpen2 $headerAnimItemDuration2 ease-in-out $headerAnimItemDuration + $headerAnimItemStart + $headerAnimItemDelay * $headerAnimItemCount + $headerAnimItemDelay2 * $headerItemNumber + $headerAnimItemDelayOffset2 1 normal forwards;
-            }
-    
-
-            &__svg {
+            .logo-icon {
                 height: 60%;
-
                 opacity: 1;
                 fill: $active-color;
             }
-        
-            // &::after {
-            //     // display:inline-block;
-            //     // position: absolute;
-            //     content: "";
-            //     width: 1px;
-            //     height: 50%;
-            //     border-right: 1px solid $separator-color;
-            //     // left: 0;
-            //     // top: 50%;
-            //     // transform: translateY(-50%);
-            // }
         }
 
         &__navigation {
-            $headerItemNumber: 2;
+            position: absolute;
+            top: 0px;
+            left: $header-logo-width-mobile + 1px;
+            height: $header-height-mobile;
+            width: calc(100% - #{$header-logo-width-mobile} - #{$header-logo-width-mobile} - 0px);
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            align-items: center;
+            justify-content: center;
 
-            height: 100%;
-            flex: 1 1;
-            // top: 50px;
+ 
+            a {
+                // align-items: flex-start;
+            }
 
+            > .list {     
+                // width: calc(100vw - #{$header-logo-width-mobile} - #{$header-logo-width-mobile-delta});
+                width: 100%;
+                height: 100%;
+
+                // @media (max-width: 330px) {
+                //     padding-right: calc(100vw - 330px + 40px);
+                //     width: 220px;
+                // }
+            
+                // @media (min-width: 500px) {
+                //     width: 400px;
+                // }
+        
+
+                // right: 0px;
+                // position: absolute;
+                // height: 100%; //calc(100% - 60px);
+
+                display: flex;
+                flex-direction: row;
+                flex-wrap: nowrap;
+                justify-content: space-evenly;
+                align-items: center;
+                // padding-left: 40px;
+                // padding-right: 40px;
+                // padding-bottom: 60px;
+                list-style: none;
+
+                > .item {
+                    height: 62.5%;
+                    width: 70px;
+                    // flex: 3 3;
+                    // border-bottom: 1px solid $separator-color;
+                    // transform: scale(1.15) translateX(75%);
+                    // opacity: 0;
+                    // transition: transform 0.5s $cubic, opacity 0.35s $cubic;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+
+                    cursor: pointer;
+
+                    // &:nth-child(1) {
+                    //     border-top: 1px solid $separator-color;
+                    // }
+                    // @for $i from 1 through $number-of-slides {
+                    //     &:nth-child(#{$i}) {
+                    //         transition-delay: #{0.40 - ($i * 0.05)}s;
+                    //     }
+                    // }     
+                    
+                    
+
+                    > a {                       
+                        display: flex;
+                        align-items: center;
+                        height: 100%;
+                        color: black;
+                        font-family: $mukta;
+                        font-size: 22px;
+                        font-weight: 200;
+
+                        // &:hover {
+                        //     color: $hover-color;
+                        // }
+
+                        // &.active {
+                        //     color: $active-color;      
+                        // }
+                    }
+                }
+            }
+            // &.openBurgerMenu {
+
+            //     width: calc(100vw - #{$header-logo-width-mobile} - #{$header-logo-width-mobile-delta});
+            //     // box-shadow:0 0 0 10000px rgba(0,0,0,.50);
+
+            //     @media (max-width: 330px) {
+            //              width: 220px;
+            //     }
+
+            //     @media (min-width: 500px) {
+            //         width: 400px;
+            //     }
+            
+            //     .list {
+
+            //         .item {
+            //             transform: scale(1) translateX(0px);
+            //             opacity: 1;
+            //             @for $i from 1 through $number-of-slides {
+            //                 &:nth-child(#{$i}) {
+            //                     transition-delay: #{0.05 * $i+0.1}s;
+            //                 }
+            //             }
+            //         } 
+            //     }  
+            // }
+            // }
+
+            // a {
+                // width: 100%;
+                // display: flex;
+                // padding-left: 15px;
+                // font-size: 22px;
+                // font-weight: 500; 
+                // color: $nonactive-color;
+            // }
+
+ 
+
+
+            &__window {
+                transform: none !important;
+
+                position: absolute;
+                background-color: $header-color; // rgba(26, 26, 26, 1); 
+                overflow: hidden;
+                transition: width 0.75s cubic-bezier(0.700, 0.000, 0.175, 1.000) 0.1s, background 0.75s ease-out 0.1s; //cubic-bezier(0.700, 0.000, 0.175, 1.000)
+                top: calc(100% - 0.5px);
+                right: -1px - $header-burger-width-mobile;
+                height: calc(100vh - #{$header-height-mobile} + 1px);
+                width: 0px; //calc(100vw - #{$header-logo-width-mobile});
+            }   
+        }
+
+        &__contact {
+            position: absolute;
+            right: 0px;
+            top: 0px;
+            height: $header-height-mobile;
+            width: $header-logo-width-mobile;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            .button {
+                position: relative;
+                height: 62.5%;
+                width: 70%;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                background: blue;
+                border-radius: 4px;
+                box-shadow: 0 0 15px 0 grey;
+                cursor: pointer;
+
+                &:hover {
+                    transform: scale(1.04) perspective(1px);
+                    box-shadow: 0 0 25px grey;
+                }
+
+                .contact-icon {
+                    height: 50%;
+                }
+            }
+        }
+
+    //     &__separator-two {
+    //         position: absolute;
+    //         top: 0.25 * $header-height-mobile;
+    //         right: $header-burger-width-mobile;
+    //         width: 1px;
+    //         height: 0.5 * $header-height-mobile;
+    //         background: $separator-color;
+    //         opacity: 1;
+    //     }
+    // }
+
+    }
+
+
+    &__lower {
+        flex: 1 1;   
+        width: 100%;
+        background: $header-color;
+
+        &__logo {
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            height: $header-height-mobile;
+            width: $header-logo-width-mobile;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;    
+
+            &__svg {
+                position: absolute;
+                height: 60%;
+                opacity: 1;
+                // fill: $active-color;
+            }
+
+            &__pic {
+                position: absolute;
+                display: none;
+                height: 70%;
+                opacity: 1;
+                // fill: $active-color;
+            }
+        }
+
+        &__separator-one {
+            position: absolute;
+            top: 0.25 * $header-height-mobile;
+            left: $header-logo-width-mobile;
+            width: 1px;
+            height: 0.5 * $header-height-mobile;
+            background: $separator-color;
+            opacity: 1;
+        }
+
+
+        &__navigation {
+            position: absolute;
+            top: 0px;
+            left: $header-logo-width-mobile + 1px;
+            height: $header-height-mobile;
+            width: calc(100% - #{$header-logo-width-mobile} - #{$header-burger-width-mobile} - 2px);
             display: flex;
             flex-direction: column;
             flex-wrap: nowrap;
             align-items: flex-start;
             justify-content: center;
 
-            // cursor: pointer;
-            // -webkit-tap-highlight-color: #000;
 
             .navigation-wrapper {
                 height: 100%;
@@ -385,26 +554,11 @@ body {
 
             a {
                 width: 100%;
-                // height: 100%;
                 display: flex;
                 padding-left: 15px;
                 font-size: 22px;
-                font-weight: 500; 
+                font-weight: 200; 
                 color: $nonactive-color;
-            }
-
-            // opacity: 1;
-            // transform: translateY(0px);
-            // transition: transform $headerAnimItemDuration ease-in-out $headerAnimItemStart + 2 * $headerAnimItemDelay, opacity $headerAnimItemDuration * $headerAnimItemOpacityDurationFactor ease-in-out $headerAnimItemDuration - $headerAnimItemStart + 2 * $headerAnimItemDelay;
-            animation: headerAnimItemOpen2Rev $headerAnimItemDuration2 ease-in-out $headerAnimItemStart + ( $headerAnimItemCount - $headerItemNumber ) * $headerAnimItemDelay 1 normal backwards, headerAnimItemOpen1Rev $headerAnimItemDuration ease-in-out $headerAnimItemDuration + $headerAnimItemStart + $headerAnimItemDelay * $headerAnimItemCount + $headerAnimItemDelay2 * $headerItemNumber + $headerAnimItemDelayOffset1Rev 1 normal forwards;
-
-            &.openUpperMenu {
-                // opacity: 0;
-                // transform: translateY($header-height-mobile + $headerTransformYOffset);
-                // transition: transform $headerAnimItemDuration ease-in-out $headerAnimItemStart + 2 * $headerAnimItemDelay, opacity $headerAnimItemDuration * $headerAnimItemOpacityDurationFactor ease-in-out $headerAnimItemStart + 2 * $headerAnimItemDelay;
-                // animation: headerAnimItemOpen1 $headerAnimItemDuration ease-in-out $headerAnimItemStart + ( $headerAnimItemCount - $headerItemNumber ) * $headerAnimItemDelay 1 normal forwards;
-                animation: headerAnimItemOpen1 $headerAnimItemDuration ease-in-out $headerAnimItemStart + ( $headerAnimItemCount - $headerItemNumber ) * $headerAnimItemDelay 1 normal forwards, headerAnimItemOpen2 $headerAnimItemDuration2 ease-in-out $headerAnimItemDuration + $headerAnimItemStart + $headerAnimItemDelay * $headerAnimItemCount + $headerAnimItemDelay2 * $headerItemNumber + $headerAnimItemDelayOffset2 1 normal forwards;
-
             }
 
             &__top {
@@ -414,19 +568,14 @@ body {
                 width: 100%;
                 height: $header-height-mobile / 2;
                 padding-top: 0.2 * $header-height-mobile;
-                // top: 0px;
                 display: flex;
                 flex-direction: row;
                 align-items: center;
 
-                
-
                 a {
                     font-size: $fontsize; 
                     color: $active-color;
-                    // padding-bottom: 3px;
                     align-items: center;
-                    // white-space: nowrap;
                 }
 
                 .engine-models {
@@ -447,20 +596,13 @@ body {
                 }
 
                 .arrowbox {
-                    // flex: 1 1;
                     width: $header-burger-width-mobile;
-                    // transition: background 1s ease-out;
-                    // transition-delay: 0.3s;
                     height: $fontsize;
                     display: flex;
                     align-items: center;
                     justify-content: center;
                     
-
-
                     .arrow {
-                        // color: $active-color;
-                        // margin-right: 15px;
                         $boxwidth: 13px;
                         $boxheight: 13px;
                         width: $boxwidth;
@@ -489,25 +631,19 @@ body {
                             transform: rotate(135deg);
                             }
                     }
-                }   
+                } 
+
                 &.engineSelect {
 
                     .engine-models {
     
                         .engine-models-slider {
                             transform: translateY(-18px);
-                            transition: transform 0.4s ease-in-out 0s;
-                            
+                            transition: transform 0.4s ease-in-out 0s;                            
                         }
                     }
 
-
-
                     .arrowbox {
-                        // background-color: #000;
-                        // transition: background 0.5s ease-in;
-                        // transition-delay: 0.1s;
-                        
 
                         .arrow {
                             transform: rotate(0);
@@ -521,81 +657,36 @@ body {
                         }
                     }
                 }
-
             }
-            
-            &__center {
-                height: 0px;
-
-                a {
-                    align-items: center;
-                }
-            }
-
 
             &__bottom {
                 position: relative;
-                // flex: 1 1;
-                // height: 100%;
                 width: 100%;
                 height: $header-height-mobile / 2;
-                // top: $header-height-mobile / 2;
                 padding-bottom: 0.13 * $header-height-mobile;
                 display: flex;
                 flex-direction: row;
                 align-items: center;
-                // justify-content: flex-start;
-                // top: 0px;
-                // transform: translateY(50%);
  
                 a {
-                    // padding-top: 3px;
                     align-items: flex-start;
-                    // align-items: flex-start;
                 }
             }
 
             .items-wrapper {
 
-                $header-logo-width-mobile-delta: 15px;
+                // $header-logo-width-mobile-delta: 15px;
+
+                transform: none !important;
 
                 position: absolute;
-                // display: flex;   
                 background-color: $header-color; // rgba(26, 26, 26, 1); 
                 overflow: hidden;
-                transition: width 0.75s cubic-bezier(0.700, 0.000, 0.175, 1.000) 0.1s, background 0.75s ease-out 0.0s; //cubic-bezier(0.700, 0.000, 0.175, 1.000)
-                // transition-delay: 0.1s;
-                top: $header-height-mobile - 0.5px;
+                transition: width 0.75s cubic-bezier(0.700, 0.000, 0.175, 1.000) 0.1s, background 0.75s ease-out 0.1s; //cubic-bezier(0.700, 0.000, 0.175, 1.000)
+                top: calc(100% - 0.5px);
                 right: -1px - $header-burger-width-mobile;
-                height: calc(100vh - #{$header-height-mobile});
+                height: calc(100vh - #{$header-height-mobile} + 1px);
                 width: 0px; //calc(100vw - #{$header-logo-width-mobile});
-                // max-width: 275px;
-                // width: 100%;
-                // width: calc(100% - #{$header-burger-width-mobile} - #{$header-logo-width-mobile});
-
-                // width: $header-burger-width-mobile;
-                
-
-                // position: absolute;
-                // background-color: $header-color;
-                // overflow: hidden;
-                // transition: width 0.6s ease-in-out, height 0.5s ease-out, background 1s ease-out;
-                // transition-delay: 0.2s;
-                // top: 100%;
-                // right: $header-burger-width-mobile;
-                // height: 0px;
-                // width: $header-burger-width-mobile;
-                // max-width: 275px;
-
-
-
-                // @media (min-width: 360px) {
-                //     width: 230px;
-                // }
-                
-                // @media (min-width: 400px) {
-                //     width: 100%;
-                // }
 
                 > .list {     
                     width: calc(100vw - #{$header-logo-width-mobile} - #{$header-logo-width-mobile-delta});
@@ -611,10 +702,9 @@ body {
                     }
             
 
-                    // width: 100%;
                     right: 0px;
                     position: absolute;
-                    height: calc(100% - 60px);
+                    height: 100%; //calc(100% - 60px);
 
                     display: flex;
                     flex-direction: column;
@@ -622,6 +712,7 @@ body {
                     justify-content: space-evenly;
                     padding-left: 40px;
                     padding-right: 40px;
+                    padding-bottom: 60px;
                     list-style: none;
 
                     > .item {
@@ -662,16 +753,11 @@ body {
                             }
                         }
                     }
-
-                    &::after {
-                        content: "";
-                        flex: 2 2;
-                    }
                 }
                 &.openBurgerMenu {
 
-                    // height: $header-nav-dropdown-menu-height;
                     width: calc(100vw - #{$header-logo-width-mobile} - #{$header-logo-width-mobile-delta});
+                    // box-shadow:0 0 0 10000px rgba(0,0,0,.50);
 
                     @media (max-width: 330px) {
                              width: 220px;
@@ -680,11 +766,7 @@ body {
                     @media (min-width: 500px) {
                         width: 400px;
                     }
-
-                    background-color:  $header-color; // #000;
-                    // transition: width 0.75s cubic-bezier(0.700, 0.000, 0.175, 1.000) 0.1s, background 0.75s ease-in 0.5s;
-                    transition-delay: 0.1s;
-
+                
                     .list {
 
                         .item {
@@ -699,126 +781,88 @@ body {
                     }  
                 }
             }   
-
-            // &__list > .dropDownOpen {
-            //     height: $header-nav-dropdown-menu-height;
-            //     background-color: #000;
-            //     transition: all 0.3s ease-in, background 0.5s ease-in;
-            //     transition-delay: 0.25s;
-
-            
-            // }
-
-
         }
 
         &__burger {
-            $headerItemNumber: 4;
+            position: absolute;
 
-            height: 100%; //$header-height-mobile;
-            // top: 0px;
-            // bottom: $header-height-mobile;
+            right: 0px;
+            top: 0px;
+            height: $header-height-mobile;
             width: $header-burger-width-mobile;
 
             display: flex;
             justify-content: center;
             align-items: center;
-            
-            // background: $header-color;
 
             cursor: pointer;
             
-            // opacity: 1;
-            // transform: translateY(0px);
-            // transition: transform $headerAnimItemDuration ease-in-out $headerAnimItemStart + 0 * $headerAnimItemDelay, opacity $headerAnimItemDuration * $headerAnimItemOpacityDurationFactor ease-in-out $headerAnimItemDuration - $headerAnimItemStart + 0 * $headerAnimItemDelay;
-            animation: headerAnimItemOpen2Rev $headerAnimItemDuration2 ease-in-out $headerAnimItemStart + ( $headerAnimItemCount - $headerItemNumber ) * $headerAnimItemDelay 1 normal backwards, headerAnimItemOpen1Rev $headerAnimItemDuration ease-in-out $headerAnimItemDuration + $headerAnimItemStart + $headerAnimItemDelay * $headerAnimItemCount + $headerAnimItemDelay2 * $headerItemNumber + $headerAnimItemDelayOffset1Rev 1 normal forwards;
+            .icon {
+                position: relative;
+                height: 20px;
+                width: 30px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                transition: .4s transform .2s;
+                   
+                >div {
+                    position: absolute;
+                    width: 100%;
+                    height: 2.25px;
+                    background: #fff;
+                    border-radius: 1px;
+                }
 
-            &.openUpperMenu {
-                // opacity: 0;
-                // transform: translateY($header-height-mobile + $headerTransformYOffset);
-                // transition: transform $headerAnimItemDuration ease-in-out $headerAnimItemStart + 0 * $headerAnimItemDelay, opacity $headerAnimItemDuration * $headerAnimItemOpacityDurationFactor ease-in-out $headerAnimItemStart + 0 * $headerAnimItemDelay;
-                // animation: headerAnimItemOpen1 $headerAnimItemDuration ease-in-out $headerAnimItemStart + ( $headerAnimItemCount - $headerItemNumber ) * $headerAnimItemDelay 1 normal forwards;
-                animation: headerAnimItemOpen1 $headerAnimItemDuration ease-in-out $headerAnimItemStart + ( $headerAnimItemCount - $headerItemNumber ) * $headerAnimItemDelay 1 normal forwards, headerAnimItemOpen2 $headerAnimItemDuration2 ease-in-out $headerAnimItemDuration + $headerAnimItemStart + $headerAnimItemDelay * $headerAnimItemCount + $headerAnimItemDelay2 * $headerItemNumber + $headerAnimItemDelayOffset2 1 normal forwards;
+                >div:before, >div:after {
+                    content: "";
+                    position: absolute;
+                    display: block;
+                    width: 100%;
+                    height: 2.25px;
+                    border-radius: 1px;
+                    background:#fff;
+                    transition: .2s transform, .2s top;
+                    transition-delay: .3s;
+                }
 
-            }
+                >div:before {
+                    top: -10px;
+                }
 
-            &.openBurgerMenu {
-                // background: #000;
-            }
+                >div:after {
+                    top: 10px;
+                }
 
-            &__svg {
-                height: 32%;
-                // transform: translateY(100%);
-                > rect {
-                    fill: $hover-color;
+                &.openBurgerMenu {
+                    transform: rotate(45deg);
+
+                    >div:before, >div:after {
+                        transform: rotate(90deg);
+                        top: 0;
+                        transition-delay: .2s;
+                    }
                 }
             }
-
         }
 
-        &__separator {
+        &__separator-two {
+            position: absolute;
+            top: 0.25 * $header-height-mobile;
+            right: $header-burger-width-mobile;
             width: 1px;
-            height: 50%;
-            border-right: 1px solid $separator-color;
-            transform: translateY(0px);
+            height: 0.5 * $header-height-mobile;
+            background: $separator-color;
             opacity: 1;
-
-            &.one {
-                $headerItemNumber: 1;
-                // transition: transform $headerAnimItemDuration ease-in-out $headerAnimItemStart + 3 * $headerAnimItemDelay, opacity $headerAnimItemDuration * $headerAnimItemOpacityDurationFactor ease-in-out $headerAnimItemDuration - $headerAnimItemStart + 3 * $headerAnimItemDelay;
-                animation: headerAnimItemOpen2Rev $headerAnimItemDuration2 ease-in-out $headerAnimItemStart + ( $headerAnimItemCount - $headerItemNumber ) * $headerAnimItemDelay 1 normal backwards, headerAnimItemOpen1Rev $headerAnimItemDuration ease-in-out $headerAnimItemDuration + $headerAnimItemStart + $headerAnimItemDelay * $headerAnimItemCount + $headerAnimItemDelay2 * $headerItemNumber + $headerAnimItemDelayOffset1Rev 1 normal forwards;
-            }
-
-            &.one.openUpperMenu {
-                $headerItemNumber: 1;
-                // opacity: 0;
-                // transform: translateY($header-height-mobile + $headerTransformYOffset);
-                // transition: transform $headerAnimItemDuration ease-in-out $headerAnimItemStart + 3 * $headerAnimItemDelay, opacity $headerAnimItemDuration * $headerAnimItemOpacityDurationFactor ease-in-out $headerAnimItemStart + 3 * $headerAnimItemDelay;
-                // animation: headerAnimItemOpen1 $headerAnimItemDuration ease-in-out $headerAnimItemStart + ( $headerAnimItemCount - $headerItemNumber ) * $headerAnimItemDelay 1 normal forwards;
-                animation: headerAnimItemOpen1 $headerAnimItemDuration ease-in-out $headerAnimItemStart + ( $headerAnimItemCount - $headerItemNumber ) * $headerAnimItemDelay 1 normal forwards, headerAnimItemOpen2 $headerAnimItemDuration2 ease-in-out $headerAnimItemDuration + $headerAnimItemStart + $headerAnimItemDelay * $headerAnimItemCount + $headerAnimItemDelay2 * $headerItemNumber + $headerAnimItemDelayOffset2 1 normal forwards;
-            }
- 
-            &.two {
-                $headerItemNumber: 3;
-                // transition: transform $headerAnimItemDuration ease-in-out $headerAnimItemStart + 1 * $headerAnimItemDelay, opacity $headerAnimItemDuration * $headerAnimItemOpacityDurationFactor ease-in-out $headerAnimItemDuration - $headerAnimItemStart + 1 * $headerAnimItemDelay;
-                animation: headerAnimItemOpen2Rev $headerAnimItemDuration2 ease-in-out $headerAnimItemStart + ( $headerAnimItemCount - $headerItemNumber ) * $headerAnimItemDelay 1 normal backwards, headerAnimItemOpen1Rev $headerAnimItemDuration ease-in-out $headerAnimItemDuration + $headerAnimItemStart + $headerAnimItemDelay * $headerAnimItemCount + $headerAnimItemDelay2 * $headerItemNumber + $headerAnimItemDelayOffset1Rev 1 normal forwards;
-            }
-           
-            &.two.openUpperMenu {
-                $headerItemNumber: 3;
-                // opacity: 0;
-                // transform: translateY($header-height-mobile + $headerTransformYOffset);
-                // transition: transform $headerAnimItemDuration ease-in-out $headerAnimItemStart + 1 * $headerAnimItemDelay, opacity $headerAnimItemDuration * $headerAnimItemOpacityDurationFactor ease-in-out $headerAnimItemStart + 1 * $headerAnimItemDelay;
-                // animation: headerAnimItemOpen1 $headerAnimItemDuration ease-in-out $headerAnimItemStart + ( $headerAnimItemCount - $headerItemNumber ) * $headerAnimItemDelay 1 normal forwards;
-                animation: headerAnimItemOpen1 $headerAnimItemDuration ease-in-out $headerAnimItemStart + ( $headerAnimItemCount - $headerItemNumber ) * $headerAnimItemDelay 1 normal forwards, headerAnimItemOpen2 $headerAnimItemDuration2 ease-in-out $headerAnimItemDuration + $headerAnimItemStart + $headerAnimItemDelay * $headerAnimItemCount + $headerAnimItemDelay2 * $headerItemNumber + $headerAnimItemDelayOffset2 1 normal forwards;
-            }
         }
-
-        // &__button {
-        //     line-height: 1;
-        //     padding: 15px 25px;
-        //     color: #fff;
-        //     background: #771016;
-        //     border-radius: 3px;
-        //     backface-visibility: hidden;
-        //     //  transition: all .3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
-
-        //     > span {
-        //         color: white;
-        //     }
-
-        //     &:hover {
-        //         transform: scale(1.04) perspective(1px);
-        //         box-shadow: 0 0 25px 0 #101010;
-        //     }
-        // }   
     }
 }
 
 .resize-animation-stopper * {
     animation: none !important;
     animation-duration: 0ms !important;
-    animation-delay: -10s !important;
+    animation-delay: 0ms !important;
     transition: none !important;
     transition-duration: 0ms !important;
     transition-delay: 0ms !important;
